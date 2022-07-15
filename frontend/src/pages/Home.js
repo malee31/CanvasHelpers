@@ -1,6 +1,6 @@
 import './Home.css';
 import Navbar from "../components/sections/Navbar";
-import Dropdown from "../components/parts/Dropdown";
+import Dropdown from "../components/mechanisms/Dropdown";
 import Content from "../components/sections/Content";
 
 function Home() {
