@@ -7,7 +7,7 @@ export default function NavToggle() {
 	const toggle = () => global.update({ navOpen: !opened });
 	return (
 		<button className="nav-toggle" onClick={toggle}>
-			Menu
+			{opened ? "<" : ">"}
 		</button>
 	);
 }

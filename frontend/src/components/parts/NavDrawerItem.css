@@ -3,6 +3,7 @@
 	padding: 1.5rem 1rem;
 	overflow-x: auto;
 	border: 1px solid #EFEFEF;
+	cursor: pointer;
 }
 
 .nav-drawer-item:hover {

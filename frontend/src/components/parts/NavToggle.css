@@ -1,3 +1,7 @@
 .nav-toggle {
-	/* No Styles Yet */
+	display: block;
+	height: 100%;
+	aspect-ratio: 1;
+	border: none;
+	padding: 0.5rem;
 }

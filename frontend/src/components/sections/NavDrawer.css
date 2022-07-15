@@ -1,14 +1,12 @@
 .nav-drawer {
-	width: 30vw;
+	width: 0;
 	transition: width .5s;
 	overflow: hidden;
 	border: 1px solid #EFEFEF;
+	flex-shrink: 0;
 }
 
-.nav-drawer-contents {
-	width: 30vw;
-}
-
+.nav-drawer-contents,
 .nav-drawer-open {
-	width: 0;
+	width: max(200px, 20vw);
 }
