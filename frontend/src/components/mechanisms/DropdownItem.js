@@ -21,7 +21,7 @@ export default function DropdownItem({ type, text, value, onClick, selected }) {
 			<div className="dropdown-item-text">
 				{text}
 			</div>
-			{type === "download" && (
+			{type !== "download" && (
 				<button className="dropdown-item-download">
 					<DownloadIcon/>
 				</button>
