@@ -1,9 +1,9 @@
-import downloadIcon from "../../static/download_icon.svg";
+import DownloadIcon from "../../static/download_icon.svg";
 import "./DropdownItem.css";
 
 /*
 	Type can be "download", "select", or default (anything else).
-	TODO: Make into enum or into separate exports
+	TODO: Make variants into enum or separate exports
  */
 export default function DropdownItem({ type, text, value, onClick, selected }) {
 	const onItemClick = type !== "download" ? () => onClick(value) : undefined;
@@ -21,9 +21,9 @@ export default function DropdownItem({ type, text, value, onClick, selected }) {
 			<div className="dropdown-item-text">
 				{text}
 			</div>
-			{type === "download" && (
+			{type !== "download" && (
 				<button className="dropdown-item-download">
-					<img src={downloadIcon} alt="Download"/>
+					<DownloadIcon/>
 				</button>
 			)}
 		</div>
