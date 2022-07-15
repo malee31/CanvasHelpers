@@ -1,5 +1,6 @@
 # Custom ignores
-index-bundle.js
+frontend/public/index.html
+frontend/public/index-bundle.js
 build/
 __pycache__
 node_modules/
