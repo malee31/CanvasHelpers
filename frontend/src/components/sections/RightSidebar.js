@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+import Sidebar from "../parts/Sidebar";
 import useGlobal from "../parts/GlobalData";
 
 export default function RightSidebar() {
