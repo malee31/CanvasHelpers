@@ -3,6 +3,10 @@ import { createContext, useContext, useState } from "react";
 const defaultContextValue = {
 	data: {
 		apiKey: "",
+		course: {
+			name: "N/A",
+			id: null
+		},
 		leftNavOpen: false,
 		rightNavOpen: false
 	},
