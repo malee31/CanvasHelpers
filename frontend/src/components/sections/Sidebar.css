@@ -1,0 +1,25 @@
+.sidebar {
+	width: 0;
+	flex-shrink: 0;
+	flex-grow: 0;
+	position: relative;
+	overflow: hidden;
+	transition: width .25s;
+}
+
+.sidebar-content,
+.sidebar-open {
+	width: min(350px, 30vw);
+}
+
+.sidebar-content-left {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.sidebar-content-right {
+	position: absolute;
+	top: 0;
+	left: 0;
+}

@@ -1,4 +1,7 @@
 .nav-drawer-item {
+	display: flex;
+	align-items: center;
+	font-size: 1.25rem;
 	width: 100%;
 	padding: 1.5rem 1rem;
 	overflow-x: auto;

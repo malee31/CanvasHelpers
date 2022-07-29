@@ -2,7 +2,9 @@ import { createContext, useContext, useState } from "react";
 
 const defaultContextValue = {
 	data: {
-		navOpen: false,
+		apiKey: "",
+		leftNavOpen: false,
+		rightNavOpen: false
 	},
 	update: () => {}
 };
