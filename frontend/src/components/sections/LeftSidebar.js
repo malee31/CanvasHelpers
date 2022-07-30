@@ -6,12 +6,17 @@ import CardButton from "../parts/Cards/CardButton";
 import KeyIcon from "../../static/key_icon.svg"
 import SyncIcon from "../../static/sync.svg";
 import ClipboardIcon from "../../static/clipboard.svg";
+import GroupIcon from "../../static/group.svg";
 import HandshakeIcon from "../../static/handshake.svg";
 import AddIcon from "../../static/add.svg";
 import "./LeftSidebar.css";
 
 export default function LeftSidebar() {
 	const global = useGlobal();
+	const closeAfter = cb => () => {
+		cb && cb();
+		global.update({leftNavOpen: false});
+	};
 
 	return (
 		<Sidebar
@@ -26,6 +31,11 @@ export default function LeftSidebar() {
 			<SidebarLabel>Qualtrics</SidebarLabel>
 			<CardButton Icon={SyncIcon}>Sync Students</CardButton>
 			<CardButton Icon={ClipboardIcon} pad={true}>Sync Survey Participation</CardButton>
+
+			<SidebarLabel>Canvas Groups</SidebarLabel>
+			<CardButton Icon={GroupIcon} pad={true} onClick={closeAfter()}>Fetch Group Categories</CardButton>
+			<CardButton Icon={GroupIcon} pad={true}>Sync Group Category</CardButton>
+
 
 			<SidebarLabel>Kudos</SidebarLabel>
 			<CardButton Icon={AddIcon} pad={true}>Create Kudos</CardButton>

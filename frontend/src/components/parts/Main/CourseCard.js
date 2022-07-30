@@ -57,6 +57,7 @@ export default function CourseCard() {
 					{Array.isArray(courses) && courses.map(course => (
 						<div
 							className="course-card-option"
+							key={course.id}
 							onClick={() => changeCourse(course)}
 						>
 							{course.name}
