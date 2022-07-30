@@ -1,0 +1,16 @@
+.left-side-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.sidebar-open.left-side-bar,
+.left-side-bar > div {
+	width: min(calc(100vw - 4rem), max(350px, 40vw));
+}
+
+
+.left-side-bar > div {
+	background: white;
+}

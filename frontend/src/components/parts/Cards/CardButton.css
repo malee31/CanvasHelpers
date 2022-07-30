@@ -23,8 +23,13 @@
 	justify-items: center;
 	align-items: center;
 	min-width: 4rem;
-	height: 100%;
+	aspect-ratio: 1;
 	flex-shrink: 0;
+}
+
+.card-button-image * {
+	aspect-ratio: 1;
+	height: 100%;
 }
 
 .card-button-image-pad {

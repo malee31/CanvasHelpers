@@ -3,6 +3,7 @@ import "./Sidebar.css";
 export default function Sidebar(props) {
 	const {
 		open,
+		className = "",
 		children,
 		Icon,
 		alignRight = false,
@@ -11,7 +12,7 @@ export default function Sidebar(props) {
 	} = props;
 
 	return (
-		<aside className={`sidebar ${open ? "sidebar-open" : ""}`} {...args}>
+		<aside className={`sidebar ${open ? "sidebar-open" : ""} ${className}`} {...args}>
 			<button
 				className={`sidebar-toggle ${alignRight ? "sidebar-toggle-right" : "sidebar-toggle-left"}`}
 				onClick={onNavToggle}

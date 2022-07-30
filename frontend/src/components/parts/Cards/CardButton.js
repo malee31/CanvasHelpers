@@ -5,11 +5,12 @@ export default function CardButton(props) {
 		Icon,
 		pad,
 		children,
+		className = "",
 		...args
 	} = props;
 
 	return (
-		<button className="card-button" {...args}>
+		<button className={`card-button ${className}`} {...args}>
 			<div className={`card-button-image ${pad ? "card-button-image-pad" : ""}`}>
 				<Icon/>
 			</div>

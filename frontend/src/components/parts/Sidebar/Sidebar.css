@@ -17,10 +17,11 @@
 	cursor: pointer;
 	color: #F7F7F7;
 	background-color: transparent;
+	backdrop-filter: blur(10px);
 }
 
 .sidebar-toggle:hover {
-	backdrop-filter: brightness(110%);
+	backdrop-filter: blur(10px) brightness(110%);
 }
 
 .sidebar-toggle-left {
@@ -42,7 +43,7 @@ sidebar-toggle-icon {
 
 .sidebar-content,
 .sidebar-open {
-	width: min(350px, 30vw);
+	width: max(400px, 35%);
 	min-height: 100%;
 	padding: 1rem;
 }

@@ -15,6 +15,7 @@ export default function LeftSidebar() {
 
 	return (
 		<Sidebar
+			className="left-side-bar"
 			Icon={MenuIcon}
 			open={global.data.leftNavOpen}
 			onNavToggle={() => global.update({ leftNavOpen: !global.data.leftNavOpen })}
