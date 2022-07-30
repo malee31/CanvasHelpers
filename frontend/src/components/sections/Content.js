@@ -1,10 +1,33 @@
+import Dropdown from "../mechanisms/Dropdown";
+import CourseCard from "../parts/CourseCard";
 import "./Content.css";
 
-export default function Content({ children }) {
+const testData = [
+	{
+		text: "ECS 36A",
+		value: "999"
+	},
+	{
+		text: "ECS 36A",
+		value: "99"
+	},
+	{
+		text: "ECS 36A",
+		value: "9"
+	},
+];
+
+export default function Content() {
+
 	return (
 		<main>
 			<div className="main-content">
-				{children}
+				<CourseCard/>
+				<Dropdown
+					title="Classes"
+					items={testData}
+					type="select"
+				/>
 			</div>
 		</main>
 	)

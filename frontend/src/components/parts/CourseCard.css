@@ -1,0 +1,11 @@
+.course-card-content {
+	width: 100%;
+	height: 100%;
+}
+
+.course-card-label {
+	width: 100%;
+	margin: 0 0 .25rem 0;
+	border-bottom: 1px solid #000000;
+	text-align: left;
+}

@@ -5,11 +5,12 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: stretch;
+	overflow: hidden;
 }
 
 .main-area {
 	display: flex;
 	flex-direction: column;
-	min-width: min(400px, 100%);
+	/*min-width: min(400px, 100%);*/
 	width: 100%;
 }

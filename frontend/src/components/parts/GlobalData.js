@@ -7,7 +7,7 @@ const defaultContextValue = {
 			name: "N/A",
 			id: null
 		},
-		leftNavOpen: false,
+		leftNavOpen: true,
 		rightNavOpen: false
 	},
 	update: () => {}
