@@ -1,5 +1,5 @@
 import Dropdown from "../mechanisms/Dropdown";
-import CourseCard from "../parts/CourseCard";
+import CourseCard from "../parts/Main/CourseCard";
 import "./Content.css";
 
 const testData = [

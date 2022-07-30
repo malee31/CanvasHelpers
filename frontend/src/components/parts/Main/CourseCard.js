@@ -1,6 +1,6 @@
-import DeskGeometricIcon from "../../static/desk.svg";
-import CardButton from "./CardButton";
-import useGlobal from "./GlobalData";
+import DeskGeometricIcon from "../../../static/desk.svg";
+import CardButton from "../Cards/CardButton";
+import useGlobal from "../GlobalData";
 import "./CourseCard.css";
 
 export default function CourseCard() {

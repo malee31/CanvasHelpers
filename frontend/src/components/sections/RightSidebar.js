@@ -1,4 +1,4 @@
-import Sidebar from "../parts/Sidebar";
+import Sidebar from "../parts/Sidebar/Sidebar";
 import useGlobal from "../parts/GlobalData";
 import DoneIcon from "../../static/done_icon.svg";
 
