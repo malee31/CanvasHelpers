@@ -4,7 +4,7 @@ const defaultContextValue = {
 	data: {
 		apiKey: "",
 		course: {
-			name: "N/A",
+			name: "",
 			id: null
 		},
 		leftNavOpen: true,

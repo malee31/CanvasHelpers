@@ -10,7 +10,7 @@ export default function CourseCard() {
 	return (
 		<CardButton Icon={DeskGeometricIcon}>
 			<div className="course-card-content">
-				<h2 className="course-card-label">{course.name}</h2>
+				<h2 className="course-card-label">{course.name || "No Course Selected"}</h2>
 			</div>
 		</CardButton>
 	);
