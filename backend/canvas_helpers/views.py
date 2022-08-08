@@ -1,13 +1,13 @@
 from os import environ
 from pathlib import Path
 import sys
-import json
 
 from canvasapi import Canvas
 
 from django.shortcuts import render
 from django.http import HttpRequest, JsonResponse
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 # TODO: do we want to allow for changing the base api url at some point?
 # if so, this would need to be reworked
@@ -18,6 +18,7 @@ def index(request):
     return render(request, "canvas_helpers/index.html")
 
 
+@csrf_exempt
 def courses_list(request: HttpRequest):
     canvas = get_canvas(request)
     # TODO add error handling
@@ -39,8 +40,12 @@ def course_group_categories(request: HttpRequest, courseid: int):
 
 
 def get_canvas(request: HttpRequest):
-    if "Canvas-Token" in request.headers:
-        api_token = request.headers.get("Canvas-Auth-Token")
+    if "Authorization" in request.headers:
+        api_token: str = request.headers.get("Authorization")
+        if api_token.startswith("Bearer ") and len(api_token) > 7:
+            api_token = api_token[7:]
+        else:
+            api_token = ""  # Improperly formatted Authorization header
     else:
         api_token = _get_token_from_env()
         if not api_token:
@@ -51,7 +56,6 @@ def get_canvas(request: HttpRequest):
 def _get_token_from_env() -> str:
     api_token = environ.get("CANVAS_API_KEY")
     if not api_token:
-        print(settings.BASE_DIR)
         token_file = Path(settings.BASE_DIR).parent / "canvas_token.txt"
         if token_file.exists():
             api_token = token_file.open().read().strip()
