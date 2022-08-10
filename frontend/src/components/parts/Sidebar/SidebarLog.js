@@ -2,13 +2,13 @@ import "./SidebarLog.css";
 
 export default function SidebarLog(props) {
 	const {
-		classNames = "",
+		className = "",
 		children,
 		...args
 	} = props;
 	return (
 		<div
-			className={`sidebar-log ${classNames}`}
+			className={`sidebar-log ${className}`}
 			{...args}
 		>
 			{children}
