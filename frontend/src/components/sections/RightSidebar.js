@@ -1,9 +1,9 @@
 import Sidebar from "../parts/Sidebar/Sidebar";
 import useGlobal from "../parts/GlobalData";
 import DoneIcon from "../../static/done_icon.svg";
-import "./RightSidebar.css";
 import SidebarLog from "../parts/Sidebar/SidebarLog";
 import SidebarLabel from "../parts/Sidebar/SidebarLabel";
+import "./RightSidebar.css";
 
 export default function RightSidebar() {
 	const global = useGlobal();
