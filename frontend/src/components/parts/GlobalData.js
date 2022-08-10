@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 const defaultContextValue = {
 	data: {
 		apiKey: localStorage.getItem("CANVAS_API_KEY") || "",
+		SERVER_URL: "http://localhost:8000",
 		course: {
 			name: "",
 			id: null

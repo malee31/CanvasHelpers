@@ -22,7 +22,7 @@ export default function CourseCard() {
 
 	const API_KEY = global.data.apiKey;
 	useEffect(() => {
-		fetch("http://localhost:8000/courses", API_KEY ? {
+		fetch(`${global.data.SERVER_URL}/courses`, API_KEY ? {
 			headers: {
 				"Authorization": `Bearer ${API_KEY}`
 			}
