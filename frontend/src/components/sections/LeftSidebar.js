@@ -54,10 +54,10 @@ export default function LeftSidebar() {
 							autoFocus={true}
 							value={apiKeyInput.toString()}
 							onChange={e => setApiKeyInput(e.currentTarget.value)}
-							onBlur={() => {
+							onBlur={closeAfter(() => {
 								saveApiKey(apiKeyInput);
 								setApiKeyInput(null);
-							}}
+							})}
 						/>
 					)
 				}

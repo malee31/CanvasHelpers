@@ -33,6 +33,7 @@ export default function CourseCard() {
 					setCourses(newCourses);
 					return;
 				}
+				if(courses) setCourses(null);
 				setErrorMessage(`${res.status}: ${res.statusText} (Check API Key)`);
 			})
 			.catch(err => setErrorMessage(`${err.code}: ${err.message}`));
