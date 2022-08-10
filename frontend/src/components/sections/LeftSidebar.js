@@ -47,7 +47,7 @@ export default function LeftSidebar() {
 				}}
 			>
 				{apiKeyInput === null
-					? (global.data.apiKey ? "Set API Key" : "Change API Key")
+					? (global.data.apiKey ? "Change API Key" : "Set API Key")
 					: (
 						<input
 							type="text"
