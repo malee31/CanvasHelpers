@@ -1,9 +1,9 @@
 import GroupIcon from "../../../static/group.svg";
-import useGlobal from "../GlobalData";
-import CollapsibleCard from "../Cards/CollapsibleCard";
+import useGlobal from "../../parts/GlobalData";
+import CollapsibleCard from "../CollapsibleCard";
 import { useEffect, useState } from "react";
-import BetterSelect from "../BetterSelect";
-import BetterButton from "../BetterButton";
+import BetterSelect from "../../parts/BetterSelect";
+import BetterButton from "../../parts/BetterButton";
 import "./GroupCategoryCard.css";
 
 export default function GroupCategoryCard() {

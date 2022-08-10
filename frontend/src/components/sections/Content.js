@@ -1,7 +1,7 @@
-import CourseCard from "../parts/Main/CourseCard";
-import CourseActions from "../parts/Main/CourseActions";
+import CourseCard from "../mechanisms/Main/CourseCard";
+import CourseActions from "../parts/CourseActions";
 import "./Content.css";
-import GroupCategoryCard from "../parts/Main/GroupCategoryCard";
+import GroupCategoryCard from "../mechanisms/Main/GroupCategoryCard";
 
 export default function Content() {
 	return (

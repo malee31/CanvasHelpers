@@ -1,6 +1,6 @@
-import useGlobal from "../GlobalData";
+import useGlobal from "./GlobalData";
 import "./CourseActions.css";
-import BetterButton from "../BetterButton";
+import BetterButton from "./BetterButton";
 
 export default function CourseActions() {
 	const global = useGlobal();

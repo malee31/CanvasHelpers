@@ -1,6 +1,6 @@
 import DeskGeometricIcon from "../../../static/desk.svg";
-import CardButton from "../Cards/CardButton";
-import useGlobal from "../GlobalData";
+import CardButton from "../../parts/Cards/CardButton";
+import useGlobal from "../../parts/GlobalData";
 import "./CourseCard.css";
 import { useEffect, useState } from "react";
 

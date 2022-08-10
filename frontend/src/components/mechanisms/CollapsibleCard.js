@@ -1,4 +1,4 @@
-import CardButton from "./CardButton";
+import CardButton from "../parts/Cards/CardButton";
 import "./CollapsibleCard.css";
 
 export default function CollapsibleCard(props) {
