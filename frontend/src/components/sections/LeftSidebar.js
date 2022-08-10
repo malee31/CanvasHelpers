@@ -27,6 +27,10 @@ export default function LeftSidebar() {
 			apiKey: val
 		});
 	};
+	const onBlur = closeAfter(() => {
+		saveApiKey(apiKeyInput);
+		setApiKeyInput(null);
+	});
 
 	return (
 		<Sidebar
@@ -55,10 +59,8 @@ export default function LeftSidebar() {
 							autoFocus={true}
 							value={apiKeyInput.toString()}
 							onChange={e => setApiKeyInput(e.currentTarget.value)}
-							onBlur={closeAfter(() => {
-								saveApiKey(apiKeyInput);
-								setApiKeyInput(null);
-							})}
+							onKeyDown={e => e.key === "Enter" && onBlur()}
+							onBlur={onBlur}
 						/>
 					)
 				}

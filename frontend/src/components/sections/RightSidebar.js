@@ -8,7 +8,6 @@ import "./RightSidebar.css";
 export default function RightSidebar() {
 	const global = useGlobal();
 	const { rightNavOpen, logEvents } = global.data;
-	console.log("Log Events: ", logEvents);
 
 	return (
 		<Sidebar

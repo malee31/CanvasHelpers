@@ -55,7 +55,7 @@ export default function GroupCategoryCard() {
 		});
 	};
 
-	return (
+	return (course.id &&
 		<CollapsibleCard
 			Icon={GroupIcon}
 			pad={true}
