@@ -19,26 +19,19 @@ export default function CourseCard() {
 		setOpen(false);
 	};
 
+	const API_KEY = global.data.apiKey;
 	useEffect(() => {
-		// Replace with API call and fetch()
-		Promise.resolve()
-			.then(res => {
-				setCourses([
-					{
-						name: "ECS 36A",
-						id: "999"
-					},
-					{
-						name: "ECS 36A",
-						id: "99"
-					},
-					{
-						name: "ECS 36A",
-						id: "9"
-					},
-				]);
-			}).catch(console.error);
-	}, [global.data.apiKey]);
+		fetch("http://localhost:8000/courses", API_KEY ? {
+			headers: {
+				"Canvas-Token": "true",
+				"Canvas-Auth-Token": API_KEY,
+				"Authorization": `Bearer ${API_KEY}`
+			}
+		} : undefined)
+			.then(res => res.json())
+			.then(newCourses => setCourses(newCourses))
+			.catch(console.error);
+	}, [API_KEY]);
 
 	return (
 		<>
