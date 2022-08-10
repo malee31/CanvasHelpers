@@ -10,7 +10,12 @@
 	width: min(calc(100vw - 4rem), max(350px, 40vw));
 }
 
-
 .left-side-bar > div {
 	background: white;
+}
+
+.api-key-input {
+	width: 100%;
+	padding: .5rem .25rem;
+	border-radius: .25rem;
 }

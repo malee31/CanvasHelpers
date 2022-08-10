@@ -9,8 +9,8 @@ import ClipboardIcon from "../../static/clipboard.svg";
 import GroupIcon from "../../static/group.svg";
 import HandshakeIcon from "../../static/handshake.svg";
 import AddIcon from "../../static/add.svg";
-import "./LeftSidebar.css";
 import { useState } from "react";
+import "./LeftSidebar.css";
 
 export default function LeftSidebar() {
 	const global = useGlobal();
@@ -51,6 +51,7 @@ export default function LeftSidebar() {
 					: (
 						<input
 							type="text"
+							className="api-key-input"
 							autoFocus={true}
 							value={apiKeyInput.toString()}
 							onChange={e => setApiKeyInput(e.currentTarget.value)}
