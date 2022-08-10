@@ -1,5 +1,6 @@
 import useGlobal from "../GlobalData";
 import "./CourseActions.css";
+import BetterButton from "../BetterButton";
 
 export default function CourseActions() {
 	const global = useGlobal();
@@ -18,18 +19,18 @@ export default function CourseActions() {
 
 	return (
 		<div className="course-actions">
-			<button
+			<BetterButton
 				className="course-action-button"
 				onClick={exportUsers}
 			>
 				Export Users as CSV
-			</button>
-			<button
+			</BetterButton>
+			<BetterButton
 				className="course-action-button"
 				onClick={openCanvas}
 			>
 				Open on Canvas
-			</button>
+			</BetterButton>
 		</div>
 	);
 }

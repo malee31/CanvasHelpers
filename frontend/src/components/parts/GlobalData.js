@@ -33,11 +33,18 @@ export function GlobalContext({ children }) {
 	const globalValue = {
 		data: globals,
 		update: updateGlobal,
-		addLog: newLog => {
-			if(newLog.fire) newLog.fire();
+		addLog: (newLog, action) => {
+			if(action) action();
+
 			updateGlobal({
 				rightNavOpen: true,
-				logEvents: [...globals.logEvents, newLog]
+				logEvents: [
+					...globals.logEvents,
+					{
+						...newLog,
+						fire: action
+					}
+				]
 			});
 		}
 	};

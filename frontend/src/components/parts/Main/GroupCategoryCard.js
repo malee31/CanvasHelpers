@@ -2,9 +2,9 @@ import GroupIcon from "../../../static/group.svg";
 import useGlobal from "../GlobalData";
 import CollapsibleCard from "../Cards/CollapsibleCard";
 import { useEffect, useState } from "react";
-import "./GroupCategoryCard.css";
 import BetterSelect from "../BetterSelect";
 import BetterButton from "../BetterButton";
+import "./GroupCategoryCard.css";
 
 export default function GroupCategoryCard() {
 	const global = useGlobal();
@@ -40,8 +40,8 @@ export default function GroupCategoryCard() {
 		if(!selectedGroupCategory) return;
 
 		global.addLog({
-			message: `Synchronizing Group Category: [${selectedGroupCategory}]`,
-			fire: () => {
+				message: `Synchronizing Group Category: [${selectedGroupCategory}]`,
+			}, () => {
 				fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {
 					method: "POST",
 					headers: apiKey ? {
@@ -55,7 +55,7 @@ export default function GroupCategoryCard() {
 					console.log("Unable to synchronize: ", res);
 				});
 			}
-		});
+		)
 	};
 
 	return (course.id &&
