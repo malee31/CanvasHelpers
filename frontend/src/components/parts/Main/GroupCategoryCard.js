@@ -1,6 +1,6 @@
 import GroupIcon from "../../../static/group.svg";
-import CardButton from "../Cards/CardButton";
 import useGlobal from "../GlobalData";
+import CollapsibleCard from "../Cards/CollapsibleCard";
 import { useEffect, useState } from "react";
 import "./GroupCategoryCard.css";
 
@@ -56,41 +56,36 @@ export default function GroupCategoryCard() {
 	};
 
 	return (
-		<>
-			<CardButton
-				className="group-category-card-display"
-				Icon={GroupIcon}
-				pad={true}
-				onClick={() => setOpen(!open)}
-			>
-				Sync Group Category
-			</CardButton>
-			<div className={`group-category-card-select-wrapper ${open ? "group-category-card-select-wrapper-open" : ""}`}>
-				<div className="group-category-card-select">
-					{!Array.isArray(groupCategories) && (
-						<p className="group-category-card-error-message">{errorMessage}</p>
-					)}
-					{Array.isArray(groupCategories) && (
-						<>
-							<select
-								className="group-category-card-select-dropdown"
-								onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
-								defaultValue={-1}
-							>
-								<option disabled={true} value={-1}>Select a Group Category</option>
-								{groupCategories.map(groupCategory => (
-									<option key={groupCategory.id} value={groupCategory.id}>{groupCategory.name}</option>
-								))}
-							</select>
-							<button
-								className="group-category-card-sync-button"
-								disabled={!Boolean(selectedGroupCategory)}
-								onClick={onSync}
-							>Sync</button>
-						</>
-					)}
-				</div>
-			</div>
-		</>
+		<CollapsibleCard
+			Icon={GroupIcon}
+			pad={true}
+			open={open}
+			setOpen={setOpen}
+			cardText="Sync Group Category"
+			maxHeight="8rem"
+			showError={!Array.isArray(groupCategories)}
+			errorMessage={errorMessage}
+		>
+			{Array.isArray(groupCategories) && (
+				<>
+					<select
+						className="group-category-card-select-dropdown"
+						onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
+						defaultValue={-1}
+					>
+						<option disabled={true} value={-1}>Select a Group Category</option>
+						{groupCategories.map(groupCategory => (
+							<option key={groupCategory.id} value={groupCategory.id}>{groupCategory.name}</option>
+						))}
+					</select>
+					<button
+						className="group-category-card-sync-button"
+						disabled={!Boolean(selectedGroupCategory)}
+						onClick={onSync}
+					>Sync
+					</button>
+				</>
+			)}
+		</CollapsibleCard>
 	);
 }

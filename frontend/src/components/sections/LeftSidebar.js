@@ -50,7 +50,7 @@ export default function LeftSidebar() {
 					? (global.data.apiKey ? "Change API Key" : "Set API Key")
 					: (
 						<input
-							type="text"
+							type="password"
 							className="api-key-input"
 							autoFocus={true}
 							value={apiKeyInput.toString()}
