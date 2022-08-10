@@ -41,6 +41,11 @@
 	overflow: auto;
 }
 
+.course-card-error-message {
+	margin: 0 auto;
+	padding: 1rem
+}
+
 .course-card-option {
 	padding: .5rem 1rem;
 	border: 1px solid #EFEFEF;
