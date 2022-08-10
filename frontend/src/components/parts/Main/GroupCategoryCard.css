@@ -4,14 +4,5 @@
 }
 
 .group-category-card-sync-button {
-	background-color: #FFFFFF;
-	border: 1px solid #EAEAEA;
-	border-radius: .25rem;
-	padding: .5rem 1rem;
 	margin-top: .5rem;
-	cursor: pointer;
-}
-
-.group-category-card-sync-button:hover {
-	background-color: #F0F0F0;
 }

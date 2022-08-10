@@ -3,6 +3,8 @@ import useGlobal from "../GlobalData";
 import CollapsibleCard from "../Cards/CollapsibleCard";
 import { useEffect, useState } from "react";
 import "./GroupCategoryCard.css";
+import BetterSelect from "../BetterSelect";
+import BetterButton from "../BetterButton";
 
 export default function GroupCategoryCard() {
 	const global = useGlobal();
@@ -15,6 +17,7 @@ export default function GroupCategoryCard() {
 	useEffect(() => {
 		if(!course.id) return;
 
+		if(selectedGroupCategory) setSelectedGroupCategory("");
 		fetch(`${SERVER_URL}/course/${course.id}/groups/categories`, apiKey ? {
 			headers: {
 				"Authorization": `Bearer ${apiKey}`
@@ -68,22 +71,21 @@ export default function GroupCategoryCard() {
 		>
 			{Array.isArray(groupCategories) && (
 				<>
-					<select
-						className="group-category-card-select-dropdown"
+					<BetterSelect
+						placeholderText="Select a Group Category"
 						onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
-						defaultValue={-1}
 					>
-						<option disabled={true} value={-1}>Select a Group Category</option>
 						{groupCategories.map(groupCategory => (
 							<option key={groupCategory.id} value={groupCategory.id}>{groupCategory.name}</option>
 						))}
-					</select>
-					<button
+					</BetterSelect>
+					<BetterButton
 						className="group-category-card-sync-button"
 						disabled={!Boolean(selectedGroupCategory)}
 						onClick={onSync}
-					>Sync
-					</button>
+					>
+						Sync
+					</BetterButton>
 				</>
 			)}
 		</CollapsibleCard>

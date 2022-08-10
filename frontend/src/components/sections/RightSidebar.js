@@ -4,6 +4,7 @@ import DoneIcon from "../../static/done_icon.svg";
 import SidebarLog from "../parts/Sidebar/SidebarLog";
 import SidebarLabel from "../parts/Sidebar/SidebarLabel";
 import "./RightSidebar.css";
+import BetterButton from "../parts/BetterButton";
 
 export default function RightSidebar() {
 	const global = useGlobal();
@@ -23,15 +24,9 @@ export default function RightSidebar() {
 						<SidebarLog key={index}>
 							<p>{logEvent.message}</p>
 							{logEvent.fire ? (
-								<button
-									style={{
-										background: "white",
-										cursor: "pointer",
-										border: "1px solid #E0E0E0",
-										borderRadius: ".25rem"
-									}}
-									onClick={logEvent.fire}
-								>Rerun</button>
+								<BetterButton onClick={logEvent.fire}>
+									Rerun
+								</BetterButton>
 							) : null}
 						</SidebarLog>
 					)
