@@ -22,7 +22,6 @@ export default function GroupCategoryCard() {
 		} : undefined).then(async res => {
 			if(res.status === 200) {
 				const newGroupCategories = await res.json();
-				console.log(newGroupCategories);
 				setGroupCategories(newGroupCategories);
 				return;
 			}
@@ -36,18 +35,23 @@ export default function GroupCategoryCard() {
 
 	const onSync = () => {
 		if(!selectedGroupCategory) return;
-		fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {
-			method: "POST",
-			headers: apiKey ? {
-				"Authorization": `Bearer ${apiKey}`
-			} : {}
-		}).then(res => {
-			// TODO: Add progress response to right sidebar
-			if(res.status === 200) {
-				console.log("Successfully Synchronized");
-				return;
+
+		global.addLog({
+			message: `Synchronizing Group Category: [${selectedGroupCategory}]`,
+			fire: () => {
+				fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {
+					method: "POST",
+					headers: apiKey ? {
+						"Authorization": `Bearer ${apiKey}`
+					} : {}
+				}).then(res => {
+					if(res.status === 200) {
+						console.log("Successfully Synchronized");
+						return;
+					}
+					console.log("Unable to synchronize: ", res);
+				});
 			}
-			console.log("Unable to synchronize: ", res);
 		});
 	};
 
@@ -71,7 +75,9 @@ export default function GroupCategoryCard() {
 							<select
 								className="group-category-card-select-dropdown"
 								onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
+								defaultValue={-1}
 							>
+								<option disabled={true} value={-1}>Select a Group Category</option>
 								{groupCategories.map(groupCategory => (
 									<option key={groupCategory.id} value={groupCategory.id}>{groupCategory.name}</option>
 								))}

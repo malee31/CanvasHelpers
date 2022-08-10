@@ -9,23 +9,35 @@ const defaultContextValue = {
 			id: null
 		},
 		leftNavOpen: false,
-		rightNavOpen: false
+		rightNavOpen: false,
+		logEvents: []
 	},
-	update: () => {}
+	update: () => {},
+	addLog: () => {}
 };
 
 const globalDataContext = createContext(defaultContextValue);
 
 export function GlobalContext({ children }) {
 	const [globals, setGlobals] = useState({ ...defaultContextValue.data });
+
+	const updateGlobal = newVal => {
+		setGlobals(oldVal => {
+			return {
+				...oldVal,
+				...newVal
+			};
+		});
+	};
+
 	const globalValue = {
 		data: globals,
-		update: newVal => {
-			setGlobals(oldVal => {
-				return {
-					...oldVal,
-					...newVal
-				};
+		update: updateGlobal,
+		addLog: newLog => {
+			if(newLog.fire) newLog.fire();
+			updateGlobal({
+				rightNavOpen: true,
+				logEvents: [...globals.logEvents, newLog]
 			});
 		}
 	};

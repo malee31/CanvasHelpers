@@ -26,7 +26,7 @@ export default function LeftSidebar() {
 		global.update({
 			apiKey: val
 		});
-	}
+	};
 
 	return (
 		<Sidebar

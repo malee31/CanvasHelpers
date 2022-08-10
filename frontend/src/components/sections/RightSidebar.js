@@ -7,17 +7,39 @@ import "./RightSidebar.css";
 
 export default function RightSidebar() {
 	const global = useGlobal();
+	const { rightNavOpen, logEvents } = global.data;
+	console.log("Log Events: ", logEvents);
 
 	return (
 		<Sidebar
 			className="right-sidebar"
-			open={global.data.rightNavOpen}
+			open={rightNavOpen}
 			Icon={DoneIcon}
 			alignRight={true}
-			onNavToggle={() => global.update({ rightNavOpen: !global.data.rightNavOpen })}
+			onNavToggle={() => global.update({ rightNavOpen: !rightNavOpen })}
 		>
 			<SidebarLabel>Logs</SidebarLabel>
-			<SidebarLog>No Logs</SidebarLog>
+			{logEvents.length > 0
+				? (logEvents.map((logEvent, index) => (
+						<SidebarLog key={index}>
+							<p>{logEvent.message}</p>
+							{logEvent.fire ? (
+								<button
+									style={{
+										background: "white",
+										cursor: "pointer",
+										border: "1px solid #E0E0E0",
+										borderRadius: ".25rem"
+									}}
+									onClick={logEvent.fire}
+								>Rerun</button>
+							) : null}
+						</SidebarLog>
+					)
+				))
+				: (<SidebarLog>No Logs</SidebarLog>)
+
+			}
 		</Sidebar>
 	);
 }
