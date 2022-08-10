@@ -23,8 +23,6 @@ export default function CourseCard() {
 	useEffect(() => {
 		fetch("http://localhost:8000/courses", API_KEY ? {
 			headers: {
-				"Canvas-Token": "true",
-				"Canvas-Auth-Token": API_KEY,
 				"Authorization": `Bearer ${API_KEY}`
 			}
 		} : undefined)

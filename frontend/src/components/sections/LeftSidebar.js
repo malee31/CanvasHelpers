@@ -10,13 +10,23 @@ import GroupIcon from "../../static/group.svg";
 import HandshakeIcon from "../../static/handshake.svg";
 import AddIcon from "../../static/add.svg";
 import "./LeftSidebar.css";
+import { useState } from "react";
 
 export default function LeftSidebar() {
 	const global = useGlobal();
 	const closeAfter = cb => () => {
 		cb && cb();
-		global.update({leftNavOpen: false});
+		global.update({ leftNavOpen: false });
 	};
+
+	const [apiKeyInput, setApiKeyInput] = useState(null);
+	const saveApiKey = val => {
+		setApiKeyInput(val);
+		localStorage.setItem("CANVAS_API_KEY", val);
+		global.update({
+			apiKey: val
+		});
+	}
 
 	return (
 		<Sidebar
@@ -26,7 +36,32 @@ export default function LeftSidebar() {
 			onNavToggle={() => global.update({ leftNavOpen: !global.data.leftNavOpen })}
 		>
 			<SidebarLabel>General</SidebarLabel>
-			<CardButton Icon={KeyIcon} pad={true}>Change API Key</CardButton>
+			<CardButton
+				Icon={KeyIcon}
+				pad={true}
+				tabIndex={0}
+				onClick={() => {
+					if(apiKeyInput === null) {
+						setApiKeyInput(global.data.apiKey);
+					}
+				}}
+			>
+				{apiKeyInput === null
+					? (global.data.apiKey ? "Set API Key" : "Change API Key")
+					: (
+						<input
+							type="text"
+							autoFocus={true}
+							value={apiKeyInput.toString()}
+							onChange={e => setApiKeyInput(e.currentTarget.value)}
+							onBlur={() => {
+								saveApiKey(apiKeyInput);
+								setApiKeyInput(null);
+							}}
+						/>
+					)
+				}
+			</CardButton>
 
 			<SidebarLabel>Qualtrics</SidebarLabel>
 			<CardButton Icon={SyncIcon}>Sync Students</CardButton>
@@ -35,7 +70,6 @@ export default function LeftSidebar() {
 			<SidebarLabel>Canvas Groups</SidebarLabel>
 			<CardButton Icon={GroupIcon} pad={true} onClick={closeAfter()}>Fetch Group Categories</CardButton>
 			<CardButton Icon={GroupIcon} pad={true}>Sync Group Category</CardButton>
-
 
 			<SidebarLabel>Kudos</SidebarLabel>
 			<CardButton Icon={AddIcon} pad={true}>Create Kudos</CardButton>
