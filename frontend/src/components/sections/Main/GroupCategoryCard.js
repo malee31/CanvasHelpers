@@ -1,39 +1,15 @@
 import GroupIcon from "../../../static/group.svg";
 import useGlobal from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
-import { useEffect, useState } from "react";
-import BetterSelect from "../../parts/BetterSelect";
 import BetterButton from "../../parts/BetterButton";
+import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
+import { useState } from "react";
 
 export default function GroupCategoryCard() {
 	const global = useGlobal();
 	const { SERVER_URL, apiKey, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
-	const [groupCategories, setGroupCategories] = useState(null);
-	const [errorMessage, setErrorMessage] = useState("Select a course first");
-
-	useEffect(() => {
-		if(!course.id) return;
-
-		if(selectedGroupCategory) setSelectedGroupCategory("");
-		fetch(`${SERVER_URL}/course/${course.id}/groups/categories`, apiKey ? {
-			headers: {
-				"Authorization": `Bearer ${apiKey}`
-			}
-		} : undefined).then(async res => {
-			if(res.status === 200) {
-				const newGroupCategories = await res.json();
-				setGroupCategories(newGroupCategories);
-				return;
-			}
-			if(groupCategories) setGroupCategories(null);
-			setErrorMessage(`Unable to load: [${res.status}] ${res.statusText}`)
-		}).catch(err => {
-			if(groupCategories) setGroupCategories(null);
-			setErrorMessage(`${err.code}: ${err.message}`);
-		});
-	}, [course.id]);
 
 	const onSync = () => {
 		if(!selectedGroupCategory) return;
@@ -65,28 +41,19 @@ export default function GroupCategoryCard() {
 			setOpen={setOpen}
 			cardText="Sync Group Category"
 			maxHeight="8rem"
-			showError={!Array.isArray(groupCategories)}
-			errorMessage={errorMessage}
 		>
-			{Array.isArray(groupCategories) && (
-				<>
-					<BetterSelect
-						placeholderText="Select a Group Category"
-						onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
-					>
-						{groupCategories.map(groupCategory => (
-							<option key={groupCategory.id} value={groupCategory.id}>{groupCategory.name}</option>
-						))}
-					</BetterSelect>
-					<BetterButton
-						style={{ marginTop: ".5rem" }}
-						disabled={!Boolean(selectedGroupCategory)}
-						onClick={onSync}
-					>
-						Sync
-					</BetterButton>
-				</>
-			)}
+			<GroupCategorySelect
+				selectedGroupCategory={selectedGroupCategory}
+				setSelectedGroupCategory={setSelectedGroupCategory}
+				onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
+			/>
+			<BetterButton
+				style={{ marginTop: ".5rem" }}
+				disabled={!Boolean(selectedGroupCategory)}
+				onClick={onSync}
+			>
+				Sync
+			</BetterButton>
 		</CollapsibleCard>
 	);
 }

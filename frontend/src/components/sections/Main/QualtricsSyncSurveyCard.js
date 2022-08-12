@@ -70,7 +70,7 @@ export default function QualtricsSyncSurveyCard() {
 			>
 				{Array.isArray(assignments) && (
 					assignments.map(assignment => (
-						<option value={assignment.id}>{assignment.name}</option>
+						<option value={assignment.id} key={assignment.id}>{assignment.name}</option>
 					))
 				)}
 			</BetterSelect>

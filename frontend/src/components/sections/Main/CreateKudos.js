@@ -3,11 +3,13 @@ import useGlobal from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import { useState } from "react";
+import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
 
 export default function CreateKudos() {
 	const global = useGlobal();
 	const { SERVER_URL, apiKey, course } = global.data;
 	const [open, setOpen] = useState(false);
+	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 
 	const onCreate = () => {
 		global.addLog({
@@ -39,6 +41,11 @@ export default function CreateKudos() {
 			maxHeight="15rem"
 			showError={false}
 		>
+			<GroupCategorySelect
+				selectedGroupCategory={selectedGroupCategory}
+				setSelectedGroupCategory={setSelectedGroupCategory}
+				onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
+			/>
 			<BetterButton
 				style={{ marginTop: ".5rem" }}
 				onClick={onCreate}
