@@ -4,12 +4,14 @@ import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
 import { useState } from "react";
+import AssignmentSelect from "../../mechanisms/AssignmentSelect";
 
 export default function ScoreKudos() {
 	const global = useGlobal();
 	const { SERVER_URL, apiKey, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
+	const [selectedAssignment, setSelectedAssignment] = useState("");
 
 	const onCreate = () => {
 		global.addLog({
@@ -45,6 +47,13 @@ export default function ScoreKudos() {
 				selectedGroupCategory={selectedGroupCategory}
 				setSelectedGroupCategory={setSelectedGroupCategory}
 				onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
+			/>
+			<AssignmentSelect
+				placeholderText="Select Kudos Assignment"
+				style={{ margin: ".5rem 0" }}
+				selectedAssignment={selectedAssignment}
+				setSelectedAssignment={setSelectedAssignment}
+				onChange={e => setSelectedAssignment(e.currentTarget.value)}
 			/>
 			<BetterButton
 				style={{ marginTop: ".5rem" }}

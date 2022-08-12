@@ -1,0 +1,15 @@
+.create-kudos-card-grid {
+	display: grid;
+	justify-content: end;
+	align-items: center;
+	grid-template-columns: max-content 2fr;
+	gap: .5rem .25rem;
+	margin-top: .5rem;
+	text-align: right;
+}
+
+.create-kudos-card-grid-input {
+	padding: .5rem;
+	border-radius: .25rem;
+	border: 1px solid black;
+}
