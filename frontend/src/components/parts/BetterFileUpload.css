@@ -1,0 +1,18 @@
+.better-file-upload {
+	background-color: #FFFFFF;
+	border-radius: .5rem;
+	border: 1px solid #E0E0E0;
+	padding: 1rem 2rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.better-file-upload:hover {
+	background-color: #F0F0F0;
+}
+
+.better-file-upload-disable {
+	background-color: #EEEEEE !important;
+	color: #E0E0E0;
+	cursor: not-allowed;
+}

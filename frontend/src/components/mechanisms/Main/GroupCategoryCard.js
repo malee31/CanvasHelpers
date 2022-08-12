@@ -4,7 +4,6 @@ import CollapsibleCard from "../CollapsibleCard";
 import { useEffect, useState } from "react";
 import BetterSelect from "../../parts/BetterSelect";
 import BetterButton from "../../parts/BetterButton";
-import "./GroupCategoryCard.css";
 
 export default function GroupCategoryCard() {
 	const global = useGlobal();
@@ -40,7 +39,7 @@ export default function GroupCategoryCard() {
 		if(!selectedGroupCategory) return;
 
 		global.addLog({
-				message: `Synchronizing Group Category: [${selectedGroupCategory}]`,
+				message: `Synchronizing Group Category: [${selectedGroupCategory}]`
 			}, () => {
 				fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {
 					method: "POST",
@@ -80,7 +79,7 @@ export default function GroupCategoryCard() {
 						))}
 					</BetterSelect>
 					<BetterButton
-						className="group-category-card-sync-button"
+						style={{ marginTop: ".5rem" }}
 						disabled={!Boolean(selectedGroupCategory)}
 						onClick={onSync}
 					>

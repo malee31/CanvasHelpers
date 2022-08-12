@@ -82,11 +82,6 @@ export default function LeftSidebar() {
 				Icon={GroupIcon}
 				pad={true}
 				onClick={closeAfter()}
-			>Fetch Group Categories</CardButton>
-			<CardButton
-				Icon={GroupIcon}
-				pad={true}
-				onClick={closeAfter()}
 			>Sync Group Category</CardButton>
 
 			<SidebarLabel>Kudos</SidebarLabel>

@@ -3,7 +3,7 @@ import "./CollapsibleCard.css";
 
 export default function CollapsibleCard(props) {
 	const {
-		className,
+		className = "",
 		Icon,
 		pad,
 		open,
@@ -26,7 +26,7 @@ export default function CollapsibleCard(props) {
 				{cardText}
 			</CardButton>
 			<div
-				className={`collapsible-card-select-wrapper ${!open ? "collapsible-card-select-wrapper-closed" : ""}`}
+				className={`collapsible-card-select-wrapper ${!open ? "collapsible-card-select-wrapper-closed" : ""} ${className}`}
 				style={{ maxHeight: maxHeight }}
 			>
 				<div

@@ -3,12 +3,19 @@ main {
 	flex-direction: row;
 	flex-grow: 1;
 	width: 100%;
+	padding: 1rem 0;
+	overflow: auto;
+}
+
+/* Hide scrollbar for no reason other than aesthetics. Not cross-browser compatible btw */
+main::-webkit-scrollbar {
+	display: none;
 }
 
 .main-content {
 	width: 100%;
 	max-width: 800px;
-	height: 100%;
+	height: max-content;
 	margin: 0 auto;
 	padding: 1rem;
 }
