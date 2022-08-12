@@ -6,7 +6,7 @@ const defaultContextValue = {
 		SERVER_URL: "http://localhost:8000",
 		course: {
 			name: "",
-			id: "null"
+			id: null
 		},
 		leftNavOpen: false,
 		rightNavOpen: false,
