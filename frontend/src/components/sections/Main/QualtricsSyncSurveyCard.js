@@ -3,30 +3,15 @@ import useGlobal from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import BetterFileUpload from "../../parts/BetterFileUpload";
-import BetterSelect from "../../parts/BetterSelect";
-import { useEffect, useState } from "react";
+import AssignmentSelect from "../../mechanisms/AssignmentSelect";
+import { useState } from "react";
 
 export default function QualtricsSyncSurveyCard() {
 	const global = useGlobal();
 	const { SERVER_URL, apiKey, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
-	const [assignments, setAssignments] = useState(null);
 	const [selectedAssignment, setSelectedAssignment] = useState(null);
-
-	useEffect(() => {
-		Promise.resolve()
-			.then(() => {
-				setTimeout(() => {
-					setAssignments([
-						{
-							name: "Test Assignment",
-							id: 9999
-						}
-					]);
-				}, 2000);
-			})
-	}, [apiKey]);
 
 	const onFile = e => setFile(e.target.files[0]);
 	const onSync = () => {
@@ -63,22 +48,18 @@ export default function QualtricsSyncSurveyCard() {
 			maxHeight="15rem"
 			showError={false}
 		>
-			<BetterSelect
+			<AssignmentSelect
 				placeholderText="Select Survey Assignment to Score"
 				style={{ margin: ".5rem 0" }}
-				onChange={e => setSelectedAssignment(e.target.value)}
-			>
-				{Array.isArray(assignments) && (
-					assignments.map(assignment => (
-						<option value={assignment.id} key={assignment.id}>{assignment.name}</option>
-					))
-				)}
-			</BetterSelect>
+				selectedAssignment={selectedAssignment}
+				setSelectedAssignment={setSelectedAssignment}
+				onChange={e => setSelectedAssignment(e.currentTarget.value)}
+			/>
 			<BetterFileUpload
 				type="file"
 				accept="text/csv"
 				onChange={onFile}
-				disabled={assignments === null}
+				disabled={selectedAssignment === null}
 			>
 				Upload Survey CSV
 			</BetterFileUpload>
