@@ -20,7 +20,7 @@ export default function RightSidebar() {
 		>
 			<SidebarLabel>Logs</SidebarLabel>
 			{logEvents.length > 0
-				? (logEvents.map((logEvent, index) => (
+				? ([...logEvents].reverse().map((logEvent, index) => (
 						<SidebarLog key={index}>
 							<p>{logEvent.message}</p>
 							{logEvent.fire ? (

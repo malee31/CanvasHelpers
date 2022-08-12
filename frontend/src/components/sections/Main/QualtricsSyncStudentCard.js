@@ -1,6 +1,6 @@
 import SyncIcon from "../../../static/sync.svg";
 import useGlobal from "../../parts/GlobalData";
-import CollapsibleCard from "../CollapsibleCard";
+import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import BetterFileUpload from "../../parts/BetterFileUpload";
 import { useState } from "react";
@@ -16,7 +16,7 @@ export default function QualtricsSyncStudentCard() {
 		if(!file) return;
 
 		global.addLog({
-				message: `Synchronizing Qualtrics Members for ${global.data.course.name}`,
+				message: `Synchronizing Qualtrics Members for ${course.name}`,
 			}, () => {
 				fetch(`${SERVER_URL}/course/${course.id}/qualtrics`, {
 					method: "POST",
@@ -39,6 +39,7 @@ export default function QualtricsSyncStudentCard() {
 	return (course.id &&
 		<CollapsibleCard
 			Icon={SyncIcon}
+			pad={true}
 			open={open}
 			setOpen={setOpen}
 			cardText="Sync Qualtrics Members"

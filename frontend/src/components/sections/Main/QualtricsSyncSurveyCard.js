@@ -1,6 +1,6 @@
 import ClipboardIcon from "../../../static/clipboard.svg";
 import useGlobal from "../../parts/GlobalData";
-import CollapsibleCard from "../CollapsibleCard";
+import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import BetterFileUpload from "../../parts/BetterFileUpload";
 import BetterSelect from "../../parts/BetterSelect";
@@ -64,7 +64,7 @@ export default function QualtricsSyncSurveyCard() {
 			showError={false}
 		>
 			<BetterSelect
-				placeholderText="Select Corresponding Survey Assignment"
+				placeholderText="Select Survey Assignment to Score"
 				style={{ margin: ".5rem 0" }}
 				onChange={e => setSelectedAssignment(e.target.value)}
 			>

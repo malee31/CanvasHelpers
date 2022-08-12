@@ -1,6 +1,6 @@
 import GroupIcon from "../../../static/group.svg";
 import useGlobal from "../../parts/GlobalData";
-import CollapsibleCard from "../CollapsibleCard";
+import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import { useEffect, useState } from "react";
 import BetterSelect from "../../parts/BetterSelect";
 import BetterButton from "../../parts/BetterButton";

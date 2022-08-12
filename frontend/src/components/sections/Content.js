@@ -1,9 +1,11 @@
-import CourseCard from "../mechanisms/Main/CourseCard";
+import CourseCard from "./Main/CourseCard";
 import CourseActions from "../parts/CourseActions";
 import "./Content.css";
-import GroupCategoryCard from "../mechanisms/Main/GroupCategoryCard";
-import QualtricsSyncStudentCard from "../mechanisms/Main/QualtricsSyncStudentCard";
-import QualtricsSyncSurveyCard from "../mechanisms/Main/QualtricsSyncSurveyCard";
+import GroupCategoryCard from "./Main/GroupCategoryCard";
+import QualtricsSyncStudentCard from "./Main/QualtricsSyncStudentCard";
+import QualtricsSyncSurveyCard from "./Main/QualtricsSyncSurveyCard";
+import CreateKudos from "./Main/CreateKudos";
+import ScoreKudos from "./Main/ScoreKudos";
 
 export default function Content() {
 	return (
@@ -14,6 +16,8 @@ export default function Content() {
 				<QualtricsSyncStudentCard/>
 				<QualtricsSyncSurveyCard/>
 				<GroupCategoryCard/>
+				<CreateKudos/>
+				<ScoreKudos/>
 			</div>
 		</main>
 	)
