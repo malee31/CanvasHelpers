@@ -34,17 +34,24 @@ class QualtricsStudent(NamedTuple):
     first_name: str
 
 
+def get_missing_qualtrics_users_from_contents(
+        users: Iterable[canvasapi.user.User], contents: Iterable[str]
+) -> Tuple[List[canvasapi.user.User], List[QualtricsStudent]]:
+    reader = csv.reader(contents)
+    canvas_students = {user.email: user for user in users if hasattr(user, 'email')}
+    qualtrics_students = {row[3]: QualtricsStudent(row[3], row[2], row[1]) for row in reader}
+
+    qualtrics_students_missing_from_canvas = [
+        student for email, student in qualtrics_students.items() if email not in canvas_students
+    ]
+    canvas_students_missing_from_qualtrics = [
+        student for email, student in canvas_students.items() if email not in qualtrics_students
+    ]
+
+    return canvas_students_missing_from_qualtrics, qualtrics_students_missing_from_canvas
+
+
 def get_missing_qualtrics_users(users: List[canvasapi.user.User], qualtrics_csv_path: str) -> \
         Tuple[List[canvasapi.user.User], List[QualtricsStudent]]:
-    canvas_students = {user.email: user for user in users if hasattr(user, 'email')}
     with open(qualtrics_csv_path, newline='') as csv_file:
-        reader = csv.reader(csv_file)
-        next(reader)
-        qualtrics_students = {row[3]: QualtricsStudent(row[3], row[2], row[1]) for row in reader}
-
-        qualtrics_students_missing_from_canvas = [student for email, student in qualtrics_students.items() if
-                                                  email not in canvas_students]
-        canvas_students_missing_from_qualtrics = [student for email, student in canvas_students.items() if
-                                                  email not in qualtrics_students]
-
-        return canvas_students_missing_from_qualtrics, qualtrics_students_missing_from_canvas
+        return get_missing_qualtrics_users_from_contents(users, csv_file)
