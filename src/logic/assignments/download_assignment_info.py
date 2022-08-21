@@ -11,10 +11,10 @@ def assignment_info_to_file(course: canvasapi.course.Course, file, skip_limit: i
 
     `file` must implement the `write()` method.
     """
-        writer = csv.writer(file)
-        for assignment_group in course.get_assignment_groups(include=['assignments']):
-            writer.writerow([assignment_group.name, assignment_group.id, ''])
-            if len(assignment_group.assignments) < skip_limit:
-                for assignment in assignment_group.assignments:
-                    writer.writerow(['', assignment['name'], assignment['id']])
-                writer.writerow([])
+    writer = csv.writer(file)
+    for assignment_group in course.get_assignment_groups(include=['assignments']):
+        writer.writerow([assignment_group.name, assignment_group.id, ''])
+        if len(assignment_group.assignments) < skip_limit:
+            for assignment in assignment_group.assignments:
+                writer.writerow(['', assignment['name'], assignment['id']])
+            writer.writerow([])
