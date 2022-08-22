@@ -32,7 +32,6 @@ export default function AssignmentSelect(props) {
 						}
 						return assignmentA.group_position - assignmentB.group_position;
 					});
-					console.log(sortedAssignmentsList)
 					setAssignments(assignmentsList);
 					return;
 				}

@@ -1,3 +1,4 @@
+import APIKeyCard from "./Main/APIKeyCard";
 import CourseCard from "./Main/CourseCard";
 import CourseActions from "../parts/CourseActions";
 import "./Content.css";
@@ -11,6 +12,7 @@ export default function Content() {
 	return (
 		<main>
 			<div className="main-content">
+				<APIKeyCard/>
 				<CourseCard/>
 				<CourseActions/>
 				<QualtricsSyncStudentCard/>
