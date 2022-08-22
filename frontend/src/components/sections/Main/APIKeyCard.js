@@ -1,5 +1,5 @@
 import KeyIcon from "../../../static/key_icon.svg";
-import useGlobal from "../../parts/GlobalData";
+import useGlobal, { saveAPIKey } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import { useState } from "react";
 
@@ -9,9 +9,9 @@ export default function APIKeyCard() {
 	const [newAPIKey, setNewAPIKey] = useState("");
 
 	if(apiKey || course.id) return null;
-	const saveAPIKey = () => {
-		if(!newAPIKey) return;
-		global.update({ apiKey: newAPIKey });
+	const onAPIBlur = () => {
+		saveAPIKey(global, newAPIKey);
+		setNewAPIKey("");
 	};
 
 	return (
@@ -27,7 +27,7 @@ export default function APIKeyCard() {
 				placeholder="Enter API Key Here"
 				value={newAPIKey}
 				onChange={e => setNewAPIKey(e.target.value)}
-				onBlur={saveAPIKey}
+				onBlur={onAPIBlur}
 			/>
 		</CollapsibleCard>
 	);

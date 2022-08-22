@@ -18,5 +18,5 @@ export default function CardButton(props) {
 				{children}
 			</div>
 		</a>
-	)
+	);
 };

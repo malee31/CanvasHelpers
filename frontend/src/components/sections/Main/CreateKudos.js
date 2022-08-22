@@ -8,7 +8,7 @@ import "./CreateKudos.css";
 
 export default function CreateKudos() {
 	const global = useGlobal();
-	const { SERVER_URL, apiKey, course } = global.data;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("Kudos Assignment");
 	const [kudosName, setKudosName] = useState("");
@@ -31,10 +31,10 @@ export default function CreateKudos() {
 
 				fetch(`${SERVER_URL}/course/${course.id}/kudos/create`, {
 					method: "POST",
-					headers: apiKey ? {
-						"Authorization": `Bearer ${apiKey}`,
+					headers: {
+						...apiHeader,
 						"Content-Type": "application/json"
-					} : {},
+					},
 					body: JSON.stringify(data)
 				}).then(res => {
 					if(res.status === 200) {

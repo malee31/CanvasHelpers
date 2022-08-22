@@ -9,7 +9,7 @@ export default function GroupCategorySelect(props) {
 		...args
 	} = props;
 	const global = useGlobal();
-	const { SERVER_URL, apiKey, course } = global.data;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	const [groupCategories, setGroupCategories] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("Select A Course First");
 
@@ -20,11 +20,9 @@ export default function GroupCategorySelect(props) {
 		}
 
 		if(selectedGroupCategory) setSelectedGroupCategory("");
-		fetch(`${SERVER_URL}/course/${course.id}/groups/categories`, apiKey ? {
-			headers: {
-				"Authorization": `Bearer ${apiKey}`
-			}
-		} : undefined).then(async res => {
+		fetch(`${SERVER_URL}/course/${course.id}/groups/categories`, {
+			headers: apiHeader
+		}).then(async res => {
 			if(res.status === 200) {
 				const newGroupCategories = await res.json();
 				setGroupCategories(newGroupCategories);

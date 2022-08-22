@@ -10,7 +10,7 @@ export default function AssignmentSelect(props) {
 		...args
 	} = props;
 	const global = useGlobal();
-	const { SERVER_URL, apiKey, course } = global.data;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	const [assignments, setAssignments] = useState(null);
 
 	useEffect(() => {
@@ -20,9 +20,9 @@ export default function AssignmentSelect(props) {
 	useEffect(() => {
 		if(!course.id) return;
 
-		fetch(`${SERVER_URL}/course/${course.id}/assignments`, apiKey ? {
-			headers: { "Authorization": `Bearer ${apiKey}` }
-		} : undefined)
+		fetch(`${SERVER_URL}/course/${course.id}/assignments`, {
+			headers: apiHeader
+		})
 			.then(async res => {
 				if(res.status === 200) {
 					const assignmentsList = await res.json();
@@ -38,10 +38,10 @@ export default function AssignmentSelect(props) {
 				if(assignments) setAssignments(null);
 				console.log(`Unable to load: [${res.status}] ${res.statusText}`)
 			}).catch(err => {
-				if(assignments) setAssignments(null);
-				console.log(`${err.code}: ${err.message}`);
-			});
-	}, [apiKey, course.id]);
+			if(assignments) setAssignments(null);
+			console.log(`${err.code}: ${err.message}`);
+		});
+	}, [apiHeader, course.id]);
 
 	return (
 		<BetterSelect

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function GroupCategoryCard() {
 	const global = useGlobal();
-	const { SERVER_URL, apiKey, course } = global.data;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 
@@ -19,9 +19,7 @@ export default function GroupCategoryCard() {
 			}, () => {
 				fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {
 					method: "POST",
-					headers: apiKey ? {
-						"Authorization": `Bearer ${apiKey}`
-					} : {}
+					headers: apiHeader
 				}).then(res => {
 					if(res.status === 200) {
 						console.log("Successfully Synchronized");

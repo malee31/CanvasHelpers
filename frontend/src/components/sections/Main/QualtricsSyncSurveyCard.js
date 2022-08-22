@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function QualtricsSyncSurveyCard() {
 	const global = useGlobal();
-	const { SERVER_URL, apiKey, course } = global.data;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
 	const [selectedAssignment, setSelectedAssignment] = useState(null);
@@ -22,10 +22,10 @@ export default function QualtricsSyncSurveyCard() {
 			}, () => {
 				fetch(`${SERVER_URL}/course/${course.id}/surveycredit/${selectedAssignment}`, {
 					method: "POST",
-					headers: apiKey ? {
-						"Authorization": `Bearer ${apiKey}`,
+					headers: {
+						...apiHeader,
 						"Content-Type": "text/csv"
-					} : {},
+					},
 					body: file
 				}).then(res => {
 					if(res.status === 200) {

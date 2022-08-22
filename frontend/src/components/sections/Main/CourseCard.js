@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function CourseCard() {
 	const global = useGlobal();
-	const course = global.data.course;
+	const { apiHeader, course } = global.data;
 	const [open, setOpen] = useState(true);
 	const [courses, setCourses] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("Loading...");
@@ -20,13 +20,10 @@ export default function CourseCard() {
 		setOpen(false);
 	};
 
-	const API_KEY = global.data.apiKey;
 	useEffect(() => {
-		fetch(`${global.data.SERVER_URL}/courses`, API_KEY ? {
-			headers: {
-				"Authorization": `Bearer ${API_KEY}`
-			}
-		} : undefined)
+		fetch(`${global.data.SERVER_URL}/courses`, {
+			headers: apiHeader
+		})
 			.then(async res => {
 				if(res.status === 200) {
 					const newCourses = await res.json();
@@ -37,7 +34,7 @@ export default function CourseCard() {
 				setErrorMessage(`${res.status}: ${res.statusText} (Check API Key)`);
 			})
 			.catch(err => setErrorMessage(`${err.code}: ${err.message}`));
-	}, [API_KEY]);
+	}, [apiHeader]);
 
 	return (
 		<>
@@ -51,7 +48,7 @@ export default function CourseCard() {
 					<div>Course ID: {course.id || "N/A"}</div>
 				</div>
 			</CardButton>
-			<div className={`course-card-select-wrapper ${open ? "course-card-select-wrapper-open" : ""}`}>
+			<div className={`course-card-select-wrapper ${!course.id || open ? "course-card-select-wrapper-open" : ""}`}>
 				<div className="course-card-select">
 					{!Array.isArray(courses) && (
 						<p className="course-card-error-message">{errorMessage}</p>

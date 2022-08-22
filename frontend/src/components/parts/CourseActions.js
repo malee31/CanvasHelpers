@@ -1,6 +1,6 @@
 import useGlobal from "./GlobalData";
-import "./CourseActions.css";
 import BetterButton from "./BetterButton";
+import "./CourseActions.css";
 
 export default function CourseActions() {
 	const global = useGlobal();
@@ -13,6 +13,12 @@ export default function CourseActions() {
 		// window.open(`${global.data.SERVER_URL}/course/${course.id}/users`, "_blank");
 	};
 
+	const exportAssignments = () => {
+		console.log("Export assignments");
+		// TODO: Have the server return a CSV with a download header
+		// window.open(`${global.data.SERVER_URL}/course/${course.id}/assignments/csv`, "_blank");
+	};
+
 	const openCanvas = () => {
 		window.open(`https://canvas.ucdavis.edu/courses/${course.id}`, "_blank");
 	}
@@ -21,15 +27,21 @@ export default function CourseActions() {
 		<div className="course-actions">
 			<BetterButton
 				className="course-action-button"
+				onClick={openCanvas}
+			>
+				Open on Canvas
+			</BetterButton>
+			<BetterButton
+				className="course-action-button"
 				onClick={exportUsers}
 			>
 				Export Users as CSV
 			</BetterButton>
 			<BetterButton
 				className="course-action-button"
-				onClick={openCanvas}
+				onClick={exportAssignments}
 			>
-				Open on Canvas
+				Export Assignments as CSV
 			</BetterButton>
 		</div>
 	);

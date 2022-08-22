@@ -8,7 +8,7 @@ import AssignmentSelect from "../../mechanisms/AssignmentSelect";
 
 export default function ScoreKudos() {
 	const global = useGlobal();
-	const { SERVER_URL, apiKey, course } = global.data;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 	const [selectedAssignment, setSelectedAssignment] = useState("");
@@ -19,9 +19,7 @@ export default function ScoreKudos() {
 			}, () => {
 				fetch(`${SERVER_URL}/course/${course.id}/kudos/results`, {
 					method: "POST",
-					headers: apiKey ? {
-						"Authorization": `Bearer ${apiKey}`
-					} : {},
+					headers: apiHeader,
 				}).then(res => {
 					if(res.status === 200) {
 						console.log("Kudos Created");

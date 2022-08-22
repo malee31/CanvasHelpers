@@ -1,6 +1,6 @@
 import Sidebar from "../parts/Sidebar/Sidebar";
 import MenuIcon from "../../static/menu_icon.svg";
-import useGlobal from "../parts/GlobalData";
+import useGlobal, { saveAPIKey } from "../parts/GlobalData";
 import SidebarLabel from "../parts/Sidebar/SidebarLabel";
 import CardButton from "../parts/Cards/CardButton";
 import KeyIcon from "../../static/key_icon.svg"
@@ -20,15 +20,8 @@ export default function LeftSidebar() {
 	};
 
 	const [apiKeyInput, setApiKeyInput] = useState(null);
-	const saveApiKey = val => {
-		setApiKeyInput(val);
-		localStorage.setItem("CANVAS_API_KEY", val);
-		global.update({
-			apiKey: val
-		});
-	};
-	const onBlur = closeAfter(() => {
-		saveApiKey(apiKeyInput);
+	const onAPIKeyBlur = closeAfter(() => {
+		saveAPIKey(global, apiKeyInput);
 		setApiKeyInput(null);
 	});
 
@@ -59,8 +52,8 @@ export default function LeftSidebar() {
 							autoFocus={true}
 							value={apiKeyInput.toString()}
 							onChange={e => setApiKeyInput(e.currentTarget.value)}
-							onKeyDown={e => e.key === "Enter" && onBlur()}
-							onBlur={onBlur}
+							onKeyDown={e => e.key === "Enter" && onAPIKeyBlur()}
+							onBlur={onAPIKeyBlur}
 						/>
 					)
 				}
