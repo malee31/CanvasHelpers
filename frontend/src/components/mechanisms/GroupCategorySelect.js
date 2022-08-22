@@ -14,7 +14,10 @@ export default function GroupCategorySelect(props) {
 	const [errorMessage, setErrorMessage] = useState("Select A Course First");
 
 	useEffect(() => {
-		if(!course.id) return;
+		if(!course.id) {
+			if(groupCategories) setGroupCategories(null);
+			return;
+		}
 
 		if(selectedGroupCategory) setSelectedGroupCategory("");
 		fetch(`${SERVER_URL}/course/${course.id}/groups/categories`, apiKey ? {
@@ -25,7 +28,7 @@ export default function GroupCategorySelect(props) {
 			if(res.status === 200) {
 				const newGroupCategories = await res.json();
 				setGroupCategories(newGroupCategories);
-				if(errorMessage !== null) setErrorMessage(null);
+				if(errorMessage) setErrorMessage(null);
 				return;
 			}
 			if(groupCategories) setGroupCategories(null);
@@ -38,7 +41,7 @@ export default function GroupCategorySelect(props) {
 
 	return (
 		<BetterSelect
-			placeholderText={errorMessage !== null ? errorMessage : "Select a Group Category"}
+			placeholderText={errorMessage || "Select a Group Category"}
 			{...args}
 		>
 			{Array.isArray(groupCategories) && (

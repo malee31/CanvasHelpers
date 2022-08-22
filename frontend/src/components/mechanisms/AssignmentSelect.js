@@ -14,16 +14,33 @@ export default function AssignmentSelect(props) {
 	const [assignments, setAssignments] = useState(null);
 
 	useEffect(() => {
+		if(assignments) setAssignments(null);
+	}, [course.id]);
+
+	useEffect(() => {
 		if(!course.id) return;
 
-		Promise.resolve()
-			.then(() => {
-				setAssignments([
-					{
-						name: "Test Assignment",
-						id: 9999
-					}
-				]);
+		fetch(`${SERVER_URL}/course/${course.id}/assignments`, apiKey ? {
+			headers: { "Authorization": `Bearer ${apiKey}` }
+		} : undefined)
+			.then(async res => {
+				if(res.status === 200) {
+					const assignmentsList = await res.json();
+					const sortedAssignmentsList = assignmentsList.sort((assignmentA, assignmentB) => {
+						if(assignmentA.group !== assignmentB.group) {
+							return assignmentA.group - assignmentB.group;
+						}
+						return assignmentA.group_position - assignmentB.group_position;
+					});
+					console.log(sortedAssignmentsList)
+					setAssignments(assignmentsList);
+					return;
+				}
+				if(assignments) setAssignments(null);
+				console.log(`Unable to load: [${res.status}] ${res.statusText}`)
+			}).catch(err => {
+				if(assignments) setAssignments(null);
+				console.log(`${err.code}: ${err.message}`);
 			});
 	}, [apiKey, course.id]);
 
