@@ -2,21 +2,52 @@ import useGlobal from "./GlobalData";
 import BetterButton from "./BetterButton";
 import "./CourseActions.css";
 
+function downloadBlob(blob, fileName) {
+	const assignmentsCSV = new File([blob], fileName);
+	const downloadURL = window.URL.createObjectURL(assignmentsCSV);
+	let tempLink = document.createElement('a');
+	tempLink.style.display = "none";
+	tempLink.href = downloadURL;
+	tempLink.download = fileName;
+	document.body.appendChild(tempLink);
+	tempLink.click();
+	tempLink.parentElement.removeChild(tempLink);
+}
+
 export default function CourseActions() {
 	const global = useGlobal();
-	const course = global.data.course;
+	const { SERVER_URL, apiHeader, course } = global.data;
 	if(!course.id) return null;
 
 	const exportUsers = () => {
 		console.log("Export users");
 		// TODO: Have the server return a CSV with a download header
-		// window.open(`${global.data.SERVER_URL}/course/${course.id}/users`, "_blank");
+		fetch(`${SERVER_URL}/course/${course.id}/users`, {
+			headers: apiHeader
+		}).then(res => {
+			if(res.status === 200) {
+				return res.blob();
+			}
+			console.log(res);
+			throw new Error(`Unexpected Response: HTTP ${res.status} ${res.statusText}`);
+		}).then(blob => {
+			downloadBlob(blob, `Users-${course.name}-${course.id}.csv`);
+		});
 	};
 
 	const exportAssignments = () => {
-		console.log("Export assignments");
-		// TODO: Have the server return a CSV with a download header
-		// window.open(`${global.data.SERVER_URL}/course/${course.id}/assignments/csv`, "_blank");
+		console.log("Exporting assignments");
+		fetch(`${SERVER_URL}/course/${course.id}/assignments/csv`, {
+			headers: apiHeader
+		}).then(res => {
+			if(res.status === 200) {
+				return res.blob();
+			}
+			console.log(res);
+			throw new Error(`Unexpected Response: HTTP ${res.status} ${res.statusText}`);
+		}).then(blob => {
+			downloadBlob(blob, `Assignments-${course.name}-${course.id}.csv`);
+		});
 	};
 
 	const openCanvas = () => {
