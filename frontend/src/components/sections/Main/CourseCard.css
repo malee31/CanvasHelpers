@@ -50,6 +50,8 @@
 	padding: .5rem 1rem;
 	border: 1px solid #EFEFEF;
 	background-color: white;
+	user-select: none;
+	cursor: pointer;
 }
 
 .course-card-option:hover {

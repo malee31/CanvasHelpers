@@ -30,11 +30,12 @@ export default function ScoreKudos() {
 					console.log("Unable to Create Kudos: ", res);
 				});
 			}
-		)
+		);
 	};
 
 	return (course.id &&
 		<CollapsibleCard
+			id="score-kudos"
 			Icon={HandshakeIcon}
 			pad={true}
 			open={open}

@@ -68,10 +68,12 @@ export default function LeftSidebar() {
 
 			<SidebarLabel>Qualtrics</SidebarLabel>
 			<CardButton
+				href="#sync-qualtrics-students"
 				Icon={SyncIcon}
 				onClick={closeAfter()}
 			>Sync Students</CardButton>
 			<CardButton
+				href="#sync-qualtrics-surveys"
 				Icon={ClipboardIcon}
 				pad={true}
 				onClick={closeAfter()}
@@ -79,6 +81,7 @@ export default function LeftSidebar() {
 
 			<SidebarLabel>Canvas Groups</SidebarLabel>
 			<CardButton
+				href="#sync-group-category"
 				Icon={GroupIcon}
 				pad={true}
 				onClick={closeAfter()}
@@ -86,11 +89,13 @@ export default function LeftSidebar() {
 
 			<SidebarLabel>Kudos</SidebarLabel>
 			<CardButton
+				href="#create-kudos"
 				Icon={AddIcon}
 				pad={true}
 				onClick={closeAfter()}
 			>Create Kudos</CardButton>
 			<CardButton
+				href="#score-kudos"
 				Icon={HandshakeIcon}
 				onClick={closeAfter()}
 			>Count Kudos</CardButton>

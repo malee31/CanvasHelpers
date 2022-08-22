@@ -10,13 +10,13 @@ export default function CardButton(props) {
 	} = props;
 
 	return (
-		<button className={`card-button ${className}`} {...args}>
+		<a className={`card-button ${className}`} {...args}>
 			<div className={`card-button-image ${pad ? "card-button-image-pad" : ""}`}>
 				<Icon/>
 			</div>
 			<div className="card-button-content">
 				{children}
 			</div>
-		</button>
+		</a>
 	)
 };

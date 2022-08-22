@@ -49,6 +49,7 @@ export default function CreateKudos() {
 
 	return (course.id &&
 		<CollapsibleCard
+			id="create-kudos"
 			Icon={AddIcon}
 			pad={true}
 			open={open}

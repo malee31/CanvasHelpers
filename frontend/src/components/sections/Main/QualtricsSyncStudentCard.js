@@ -38,6 +38,7 @@ export default function QualtricsSyncStudentCard() {
 
 	return (course.id &&
 		<CollapsibleCard
+			id="sync-qualtrics-students"
 			Icon={SyncIcon}
 			pad={true}
 			open={open}

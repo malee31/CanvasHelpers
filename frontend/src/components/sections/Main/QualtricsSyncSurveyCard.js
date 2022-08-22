@@ -40,6 +40,7 @@ export default function QualtricsSyncSurveyCard() {
 
 	return (course.id &&
 		<CollapsibleCard
+			id="sync-qualtrics-surveys"
 			Icon={ClipboardIcon}
 			pad={true}
 			open={open}
