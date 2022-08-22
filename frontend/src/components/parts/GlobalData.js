@@ -65,6 +65,10 @@ export function saveAPIKey(global, newAPIKey) {
 		apiKey: newAPIKey,
 		apiHeader: {
 			"Authorization": `Bearer ${newAPIKey}`
+		},
+		course: {
+			name: "",
+			id: null
 		}
 	});
 }
