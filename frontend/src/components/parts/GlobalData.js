@@ -140,22 +140,59 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 	// TODO: Add error handling
 	useEffect(() => {
 		if(!data.course.id) return;
+
 		console.log("Regenerating course data...");
 		// TODO: Regenerate data and cache the course
 		// NOTE: Both fetches are fire and forget
-		fetch(`${SERVER_URL}/course/${data.course.id}/groups/categories`, {
-			headers: apiHeader
-		}).then(async res => {
-			if(res.status !== 200) return;
-			const newGroupCategories = await res.json();
-			data.update({
-				course: {
-					...data.course,
-					userGroups: newGroupCategories
-				}
-			});
-		});
 
+		Promise.all([
+			// Regenerate group categories (userGroups)
+			fetch(`${SERVER_URL}/course/${data.course.id}/groups/categories`, {
+				headers: apiHeader
+			}).then(async res => {
+				if(res.status !== 200) return;
+
+				const newGroupCategories = await res.json();
+				data.update({
+					course: {
+						...data.course,
+						userGroups: newGroupCategories
+					}
+				});
+			}),
+
+			// Regenerate assignments
+			fetch(`${SERVER_URL}/course/${data.course.id}/assignments`, {
+				headers: apiHeader
+			})
+				.then(async res => {
+					if(res.status !== 200) return;
+
+					const assignmentsList = await res.json();
+					const sortedAssignmentsList = assignmentsList.sort((assignmentA, assignmentB) => {
+						if(assignmentA.group !== assignmentB.group) {
+							return assignmentA.group - assignmentB.group;
+						}
+						return assignmentA.group_position - assignmentB.group_position;
+					});
+
+					const newGroups = [];
+					for(const assignment of assignmentsList) {
+						if(!newGroups.find(group => group.id === assignment.group)) {
+							newGroups.push({ name: assignment.group_name, id: assignment.group });
+						}
+					}
+					data.update({
+						course: {
+							...data.course,
+							assignments: {
+								groups: newGroups,
+								all: sortedAssignmentsList
+							}
+						}
+					});
+				})
+		]).then(() => console.log("Successfully fetched course data"));
 	}, [data.course.id, SERVER_URL, apiHeader]);
 });
 

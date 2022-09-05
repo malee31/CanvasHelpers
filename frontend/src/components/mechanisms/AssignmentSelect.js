@@ -1,4 +1,4 @@
-import { useCourse, useEnvironment } from "../parts/GlobalData";
+import { useCourse } from "../parts/GlobalData";
 import BetterSelect from "../parts/BetterSelect";
 import { useEffect, useState } from "react";
 
@@ -9,52 +9,14 @@ export default function AssignmentSelect(props) {
 		placeholderText,
 		...args
 	} = props;
-	const environment = useEnvironment();
 	const { course } = useCourse();
-	const { SERVER_URL, apiHeader } = environment;
 	const [groupFilter, setGroupFilter] = useState("");
-	const [assignments, setAssignments] = useState(null);
-	const [assignmentGroups, setAssignmentGroups] = useState(null);
+	const assignments = course.assignments.all;
+	const assignmentGroups = course.assignments.groups;
 
 	useEffect(() => {
-		if(assignments) setAssignments(null);
-		if(assignmentGroups) setAssignmentGroups(null);
+		setSelectedAssignment(null);
 	}, [course.id]);
-
-	useEffect(() => {
-		if(!course.id) return;
-
-		fetch(`${SERVER_URL}/course/${course.id}/assignments`, {
-			headers: apiHeader
-		})
-			.then(async res => {
-				if(res.status === 200) {
-					const assignmentsList = await res.json();
-					const sortedAssignmentsList = assignmentsList.sort((assignmentA, assignmentB) => {
-						if(assignmentA.group !== assignmentB.group) {
-							return assignmentA.group - assignmentB.group;
-						}
-						return assignmentA.group_position - assignmentB.group_position;
-					});
-					setAssignments(assignmentsList);
-
-					const newGroups = [];
-					for(const assignment of assignmentsList) {
-						if(!newGroups.find(group => group.id === assignment.group)) {
-							newGroups.push({ name: assignment.group_name, id: assignment.group });
-						}
-					}
-					setAssignmentGroups(newGroups);
-
-					return;
-				}
-				if(assignments) setAssignments(null);
-				console.log(`Unable to load: [${res.status}] ${res.statusText}`)
-			}).catch(err => {
-			if(assignments) setAssignments(null);
-			console.log(`${err.code}: ${err.message}`);
-		});
-	}, [apiHeader, course.id]);
 
 	return (
 		<>
@@ -63,7 +25,8 @@ export default function AssignmentSelect(props) {
 				defaultValue=""
 				onChange={e => {
 					console.log("FILTER")
-					setGroupFilter(e.target.value)}}
+					setGroupFilter(e.target.value)
+				}}
 				{...args}
 			>
 				<option value="">Any</option>
