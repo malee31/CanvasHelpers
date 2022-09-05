@@ -63,7 +63,7 @@ export default function QualtricsSyncSurveyCard() {
 				onChange={onFile}
 				disabled={selectedAssignment === null}
 			>
-				Upload Survey CSV
+				{file ? `Selected CSV [${file.name}]` : "Upload Survey CSV"}
 			</BetterFileUpload>
 			<BetterButton
 				style={{ marginTop: ".5rem" }}

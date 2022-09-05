@@ -53,7 +53,7 @@ export default function QualtricsSyncStudentCard() {
 				accept="text/csv"
 				onChange={onFile}
 			>
-				Upload Student CSV
+				{file ? `Selected CSV [${file.name}]` : "Upload Student CSV"}
 			</BetterFileUpload>
 			<BetterButton
 				style={{ marginTop: ".5rem" }}
