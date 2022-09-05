@@ -16,16 +16,17 @@ export default function GroupCategoryCard() {
 
 		global.addLog({
 				message: `Synchronizing Group Category: [${selectedGroupCategory}]`
-			}, () => {
+			}, ({ setStatus, setError }) => {
 				fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {
 					method: "POST",
 					headers: apiHeader
 				}).then(res => {
 					if(res.status === 200) {
-						console.log("Successfully Synchronized");
+						setStatus("Successfully Synchronized");
 						return;
 					}
-					console.log("Unable to synchronize: ", res);
+					setError(true);
+					setStatus(`Unable to synchronize: [${res.status}] ${res.statusText}`);
 				});
 			}
 		)

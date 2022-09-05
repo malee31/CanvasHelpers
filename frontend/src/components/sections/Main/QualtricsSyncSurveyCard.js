@@ -19,8 +19,8 @@ export default function QualtricsSyncSurveyCard() {
 
 		global.addLog({
 				message: `Synchronizing Qualtrics Survey for [${selectedAssignment}]`
-			}, () => {
-				fetch(`${SERVER_URL}/course/${course.id}/surveycredit/${selectedAssignment}`, {
+			}, ({ setStatus, setError }) => {
+				return fetch(`${SERVER_URL}/course/${course.id}/surveycredit/${selectedAssignment}`, {
 					method: "POST",
 					headers: {
 						...apiHeader,
@@ -29,10 +29,11 @@ export default function QualtricsSyncSurveyCard() {
 					body: file
 				}).then(res => {
 					if(res.status === 200) {
-						console.log("Successfully Synchronized");
+						setStatus("Successfully Synchronized");
 						return;
 					}
-					console.log("Unable to synchronize: ", res);
+					setError(true);
+					setStatus(`Unable to synchronize: [${res.status}] ${res.statusText}`);
 				});
 			}
 		)

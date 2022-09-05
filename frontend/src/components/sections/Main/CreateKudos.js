@@ -10,8 +10,9 @@ export default function CreateKudos() {
 	const global = useGlobal();
 	const { SERVER_URL, apiHeader, course } = global.data;
 	const [open, setOpen] = useState(false);
-	const [selectedGroupCategory, setSelectedGroupCategory] = useState("Kudos Assignment");
-	const [kudosName, setKudosName] = useState("");
+	const [selectedGroupCategory, setSelectedGroupCategory] = useState(null);
+	const [kudosName, setKudosName] = useState("Kudos Assignment");
+	const [points, setPoints] = useState(2);
 	const [openDate, setOpenDate] = useState("");
 	const [dueDate, setDueDate] = useState("");
 	const [closeDate, setCloseDate] = useState("");
@@ -19,9 +20,10 @@ export default function CreateKudos() {
 	const onCreate = () => {
 		global.addLog({
 				message: `Creating Kudos for [${course.name}]`
-			}, () => {
+			}, ({ setStatus, setError }) => {
 				const data = {
 					assignmentName: kudosName,
+					points: points,
 					dates: {
 						open: openDate,
 						due: dueDate,
@@ -38,10 +40,11 @@ export default function CreateKudos() {
 					body: JSON.stringify(data)
 				}).then(res => {
 					if(res.status === 200) {
-						console.log("Kudos Created");
+						setStatus("Kudos Created");
 						return;
 					}
-					console.log("Unable to Create Kudos: ", res);
+					setError(true);
+					setStatus(`Unable to Create Kudos: [${res.status}] ${res.statusText}`);
 				});
 			}
 		)
@@ -72,6 +75,13 @@ export default function CreateKudos() {
 					className="create-kudos-card-grid-input"
 					type="text"
 					onChange={e => setKudosName(e.target.value)}
+				/>
+
+				<label>Number of Points: </label>
+				<input
+					className="create-kudos-card-grid-input"
+					type="number"
+					onChange={e => setPoints(e.target.value)}
 				/>
 
 				<label>Open Date: </label>

@@ -36,8 +36,6 @@ export function GlobalContext({ children }) {
 		data: globals,
 		update: updateGlobal,
 		addLog: (newLog, action) => {
-			if(action) action();
-
 			updateGlobal({
 				rightNavOpen: true,
 				logEvents: [

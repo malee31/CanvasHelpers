@@ -4,3 +4,11 @@
 	padding: 1rem;
 	margin: .25rem 0;
 }
+
+.sidebar-log-status {
+	color: #258D25;
+}
+
+.sidebar-log-error {
+	color: #B23D33;
+}

@@ -11,6 +11,7 @@ export default function AssignmentSelect(props) {
 	} = props;
 	const global = useGlobal();
 	const { SERVER_URL, apiHeader, course } = global.data;
+	const [groupFilter, setGroupFilter] = useState("");
 	const [assignments, setAssignments] = useState(null);
 
 	useEffect(() => {
@@ -44,15 +45,33 @@ export default function AssignmentSelect(props) {
 	}, [apiHeader, course.id]);
 
 	return (
-		<BetterSelect
-			placeholderText={placeholderText || "Select an Assignment"}
-			{...args}
-		>
-			{Array.isArray(assignments) && (
-				assignments.map(assignment => (
-					<option value={assignment.id} key={assignment.id}>{assignment.name}</option>
-				))
-			)}
-		</BetterSelect>
+		<>
+			<BetterSelect
+				placeholderText={"Filter by Group"}
+				defaultValue=""
+				{...args}
+			>
+				<option value="">Any</option>
+				{Array.isArray(assignments) && (
+					assignments
+						.filter(assignment => !groupFilter || console.log(`${assignment.group} ${groupFilter}`))
+						.map(assignment => (
+							<option value={assignment.id} key={assignment.id}>{assignment.name}</option>
+						))
+				)}
+			</BetterSelect>
+			<BetterSelect
+				placeholderText={placeholderText || "Select an Assignment"}
+				{...args}
+			>
+				{Array.isArray(assignments) && (
+					assignments
+						.filter(assignment => !groupFilter || console.log(`${assignment.group} ${groupFilter}`))
+						.map(assignment => (
+							<option value={assignment.id} key={assignment.id}>{assignment.name}</option>
+						))
+				)}
+			</BetterSelect>
+		</>
 	)
 }

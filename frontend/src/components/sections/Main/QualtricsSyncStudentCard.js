@@ -17,7 +17,7 @@ export default function QualtricsSyncStudentCard() {
 
 		global.addLog({
 				message: `Synchronizing Qualtrics Members for ${course.name}`,
-			}, () => {
+			}, ({ setStatus, setError }) => {
 				fetch(`${SERVER_URL}/course/${course.id}/qualtrics`, {
 					method: "POST",
 					headers: {
@@ -27,10 +27,11 @@ export default function QualtricsSyncStudentCard() {
 					body: file
 				}).then(res => {
 					if(res.status === 200) {
-						console.log("Successfully Synchronized");
+						setStatus("Successfully Synchronized");
 						return;
 					}
-					console.log("Unable to synchronize: ", res);
+					setError(true);
+					setStatus(`Unable to synchronize: [${res.status}] ${res.statusText}`);
 				});
 			}
 		)

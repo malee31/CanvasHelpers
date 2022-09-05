@@ -16,16 +16,17 @@ export default function ScoreKudos() {
 	const onCreate = () => {
 		global.addLog({
 				message: `Scoring Kudos for [${course.name}]`
-			}, () => {
+			}, ({ setStatus, setError }) => {
 				fetch(`${SERVER_URL}/course/${course.id}/kudos/results`, {
 					method: "POST",
 					headers: apiHeader,
 				}).then(res => {
 					if(res.status === 200) {
-						console.log("Kudos Created");
+						setStatus("Kudos Created");
 						return;
 					}
-					console.log("Unable to Create Kudos: ", res);
+					setError(true);
+					setStatus(`Unable to Create Kudos: [${res.status}] ${res.statusText}`);
 				});
 			}
 		);
@@ -49,7 +50,7 @@ export default function ScoreKudos() {
 			/>
 			<AssignmentSelect
 				placeholderText="Select Kudos Assignment"
-				style={{ margin: ".5rem 0" }}
+				style={{ margin: "0 0 .5rem 0" }}
 				selectedAssignment={selectedAssignment}
 				setSelectedAssignment={setSelectedAssignment}
 				onChange={e => setSelectedAssignment(e.currentTarget.value)}
