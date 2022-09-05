@@ -16,7 +16,7 @@ function downloadBlob(blob, fileName) {
 
 export default function CourseActions() {
 	const environment = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const { SERVER_URL, apiHeader } = environment;
 	if(!course.id) return null;
 

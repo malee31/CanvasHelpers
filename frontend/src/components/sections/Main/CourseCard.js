@@ -6,15 +6,16 @@ import "./CourseCard.css";
 
 export default function CourseCard() {
 	const { SERVER_URL, apiHeader } = useEnvironment();
-	const course = useCourse();
+	const courseData = useCourse();
+	const { course } = courseData;
 	const [open, setOpen] = useState(true);
 	const [courses, setCourses] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("Loading...");
 	const changeCourse = newCourse => {
-		course.setCourse(newCourse.id, newCourse.name);
+		courseData.setCourse(newCourse.id, newCourse.name);
 		setOpen(false);
-	};
 
+	};
 	useEffect(() => {
 		fetch(`${SERVER_URL}/courses`, {
 			headers: apiHeader

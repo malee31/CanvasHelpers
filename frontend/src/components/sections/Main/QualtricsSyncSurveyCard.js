@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function QualtricsSyncSurveyCard() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
 	const [selectedAssignment, setSelectedAssignment] = useState(null);

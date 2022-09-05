@@ -9,7 +9,7 @@ export default function GroupCategorySelect(props) {
 		...args
 	} = props;
 	const environment = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const { SERVER_URL, apiHeader } = environment;
 	const [groupCategories, setGroupCategories] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("Select A Course First");

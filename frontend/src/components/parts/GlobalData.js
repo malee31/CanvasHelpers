@@ -123,6 +123,7 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 					[courseID]: newCourse
 				}
 			});
+			console.log("New course")
 			// TODO: Load assignments and userGroups
 		},
 		clear: () => {

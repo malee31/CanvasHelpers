@@ -9,7 +9,7 @@ import "./CreateKudos.css";
 export default function CreateKudos() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState(null);
 	const [kudosName, setKudosName] = useState("Kudos Assignment");

@@ -10,7 +10,7 @@ export default function AssignmentSelect(props) {
 		...args
 	} = props;
 	const environment = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const { SERVER_URL, apiHeader } = environment;
 	const [groupFilter, setGroupFilter] = useState("");
 	const [assignments, setAssignments] = useState(null);

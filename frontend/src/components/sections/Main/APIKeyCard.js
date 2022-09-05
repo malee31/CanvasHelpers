@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function APIKeyCard() {
 	const environment = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const [newAPIKey, setNewAPIKey] = useState("");
 
 	if(environment.apiKey || course.id) return null;

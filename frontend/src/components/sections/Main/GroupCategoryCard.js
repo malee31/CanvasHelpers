@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function GroupCategoryCard() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 

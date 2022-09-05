@@ -9,7 +9,7 @@ import AssignmentSelect from "../../mechanisms/AssignmentSelect";
 export default function ScoreKudos() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 	const [selectedAssignment, setSelectedAssignment] = useState("");

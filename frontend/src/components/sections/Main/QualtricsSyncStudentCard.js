@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function QualtricsSyncStudentCard() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
-	const course = useCourse();
+	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
 
