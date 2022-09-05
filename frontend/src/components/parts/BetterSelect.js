@@ -2,7 +2,7 @@ import "./BetterSelect.css";
 
 export default function BetterSelect(props) {
 	const {
-		className,
+		className = "",
 		children,
 		placeholderText,
 		...args

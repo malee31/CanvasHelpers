@@ -2,7 +2,7 @@ import "./BetterFileUpload.css";
 
 export default function BetterFileUpload(props) {
 	const {
-		className,
+		className = "",
 		accept,
 		onChange,
 		children = "",
