@@ -150,15 +150,9 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 			fetch(`${SERVER_URL}/course/${data.course.id}/groups/categories`, {
 				headers: apiHeader
 			}).then(async res => {
-				if(res.status !== 200) return;
+				if(res.status !== 200) throw new Error("HTTP Status not 200");
 
-				const newGroupCategories = await res.json();
-				data.update({
-					course: {
-						...data.course,
-						userGroups: newGroupCategories
-					}
-				});
+				return await res.json();
 			}),
 
 			// Regenerate assignments
@@ -166,7 +160,7 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 				headers: apiHeader
 			})
 				.then(async res => {
-					if(res.status !== 200) return;
+					if(res.status !== 200) throw new Error("HTTP Status not 200");
 
 					const assignmentsList = await res.json();
 					const sortedAssignmentsList = assignmentsList.sort((assignmentA, assignmentB) => {
@@ -182,17 +176,23 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 							newGroups.push({ name: assignment.group_name, id: assignment.group });
 						}
 					}
-					data.update({
-						course: {
-							...data.course,
-							assignments: {
-								groups: newGroups,
-								all: sortedAssignmentsList
-							}
-						}
-					});
+
+					return {
+						groups: newGroups,
+						all: sortedAssignmentsList
+					};
 				})
-		]).then(() => console.log("Successfully fetched course data"));
+		]).then(([newUserGroups, newAssignments]) => {
+			console.log([newUserGroups, newAssignments])
+			data.update({
+				course: {
+					...data.course,
+					assignments: newAssignments,
+					userGroups: newUserGroups
+				}
+			});
+			console.log("Successfully fetched course data")
+		});
 	}, [data.course.id, SERVER_URL, apiHeader]);
 });
 

@@ -7,6 +7,7 @@ export default function AssignmentSelect(props) {
 		selectedAssignment,
 		setSelectedAssignment,
 		placeholderText,
+		onChange,
 		...args
 	} = props;
 	const { course } = useCourse();
@@ -24,7 +25,7 @@ export default function AssignmentSelect(props) {
 				placeholderText={"Filter by Group"}
 				defaultValue=""
 				onChange={e => {
-					console.log("FILTER")
+					console.log(`FILTER ${e.target.value}`)
 					setGroupFilter(e.target.value)
 				}}
 				{...args}
@@ -39,12 +40,12 @@ export default function AssignmentSelect(props) {
 			</BetterSelect>
 			<BetterSelect
 				placeholderText={placeholderText || "Select an Assignment"}
-				onChange={e => setSelectedAssignment(e.target.value)}
+				onChange={onChange || (e => setSelectedAssignment(e.target.value))}
 				{...args}
 			>
 				{Array.isArray(assignments) && (
 					assignments
-						.filter(assignment => !groupFilter || assignment.group === groupFilter)
+						.filter(assignment => !groupFilter || assignment.group.toString() === groupFilter.toString())
 						.map(assignment => (
 							<option value={assignment.id} key={assignment.id}>{assignment.name}</option>
 						))

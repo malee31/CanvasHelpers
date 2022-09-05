@@ -17,5 +17,5 @@ export default function BetterSelect(props) {
 			<option disabled={true} value={-1}>{placeholderText || "Select an Option"}</option>
 			{children}
 		</select>
-	)
+	);
 }
