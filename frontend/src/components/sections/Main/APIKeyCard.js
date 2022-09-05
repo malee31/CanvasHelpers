@@ -1,16 +1,16 @@
 import KeyIcon from "../../../static/key_icon.svg";
-import useGlobal, { saveAPIKey } from "../../parts/GlobalData";
+import { useCourse, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import { useState } from "react";
 
 export default function APIKeyCard() {
-	const global = useGlobal();
-	const { apiKey, course } = global.data;
+	const environment = useEnvironment();
+	const course = useCourse();
 	const [newAPIKey, setNewAPIKey] = useState("");
 
-	if(apiKey || course.id) return null;
+	if(environment.apiKey || course.id) return null;
 	const onAPIBlur = () => {
-		saveAPIKey(global, newAPIKey);
+		environment.saveAPIKey(newAPIKey);
 		setNewAPIKey("");
 	};
 

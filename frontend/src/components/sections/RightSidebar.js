@@ -1,14 +1,13 @@
 import Sidebar from "../parts/Sidebar/Sidebar";
-import useGlobal from "../parts/GlobalData";
+import { useDisplay } from "../parts/GlobalData";
 import DoneIcon from "../../static/done_icon.svg";
 import SidebarLog from "../parts/Sidebar/SidebarLog";
 import SidebarLabel from "../parts/Sidebar/SidebarLabel";
 import "./RightSidebar.css";
-import BetterButton from "../parts/BetterButton";
 
 export default function RightSidebar() {
-	const global = useGlobal();
-	const { rightNavOpen, logEvents } = global.data;
+	const display = useDisplay();
+	const { rightNavOpen, logEvents } = display;
 
 	return (
 		<Sidebar
@@ -16,7 +15,7 @@ export default function RightSidebar() {
 			open={rightNavOpen}
 			Icon={DoneIcon}
 			alignRight={true}
-			onNavToggle={() => global.update({ rightNavOpen: !rightNavOpen })}
+			onNavToggle={() => display.update({ rightNavOpen: !rightNavOpen })}
 		>
 			<SidebarLabel>Logs</SidebarLabel>
 			{logEvents.length > 0
@@ -27,7 +26,6 @@ export default function RightSidebar() {
 					)
 				))
 				: (<SidebarLog>No Logs</SidebarLog>)
-
 			}
 		</Sidebar>
 	);

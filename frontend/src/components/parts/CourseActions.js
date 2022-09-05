@@ -1,4 +1,4 @@
-import useGlobal from "./GlobalData";
+import { useCourse, useEnvironment } from "./GlobalData";
 import BetterButton from "./BetterButton";
 import "./CourseActions.css";
 
@@ -15,8 +15,9 @@ function downloadBlob(blob, fileName) {
 }
 
 export default function CourseActions() {
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const environment = useEnvironment();
+	const course = useCourse();
+	const { SERVER_URL, apiHeader } = environment;
 	if(!course.id) return null;
 
 	const exportUsers = () => {

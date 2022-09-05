@@ -1,20 +1,21 @@
 import GroupIcon from "../../../static/group.svg";
-import useGlobal from "../../parts/GlobalData";
+import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
 import { useState } from "react";
 
 export default function GroupCategoryCard() {
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const display = useDisplay();
+	const { SERVER_URL, apiHeader } = useEnvironment();
+	const course = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 
 	const onSync = () => {
 		if(!selectedGroupCategory) return;
 
-		global.addLog({
+		display.addLog({
 				message: `Synchronizing Group Category: [${selectedGroupCategory}]`
 			}, ({ setStatus, setError }) => {
 				fetch(`${SERVER_URL}/course/${course.id}/groups/category/${selectedGroupCategory}`, {

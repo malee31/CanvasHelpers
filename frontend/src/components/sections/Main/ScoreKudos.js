@@ -1,5 +1,5 @@
 import HandshakeIcon from "../../../static/handshake.svg";
-import useGlobal from "../../parts/GlobalData";
+import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
@@ -7,14 +7,15 @@ import { useState } from "react";
 import AssignmentSelect from "../../mechanisms/AssignmentSelect";
 
 export default function ScoreKudos() {
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const display = useDisplay();
+	const { SERVER_URL, apiHeader } = useEnvironment();
+	const course = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 	const [selectedAssignment, setSelectedAssignment] = useState("");
 
 	const onCreate = () => {
-		global.addLog({
+		display.addLog({
 				message: `Scoring Kudos for [${course.name}]`
 			}, ({ setStatus, setError }) => {
 				fetch(`${SERVER_URL}/course/${course.id}/kudos/results`, {

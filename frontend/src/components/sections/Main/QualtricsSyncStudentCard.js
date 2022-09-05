@@ -1,13 +1,14 @@
 import SyncIcon from "../../../static/sync.svg";
-import useGlobal from "../../parts/GlobalData";
+import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import BetterFileUpload from "../../parts/BetterFileUpload";
 import { useState } from "react";
 
 export default function QualtricsSyncStudentCard() {
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const display = useDisplay();
+	const { SERVER_URL, apiHeader } = useEnvironment();
+	const course = useCourse();
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
 
@@ -15,7 +16,7 @@ export default function QualtricsSyncStudentCard() {
 	const onSync = () => {
 		if(!file) return;
 
-		global.addLog({
+		display.addLog({
 				message: `Synchronizing Qualtrics Members for ${course.name}`,
 			}, ({ setStatus, setError }) => {
 				fetch(`${SERVER_URL}/course/${course.id}/qualtrics`, {

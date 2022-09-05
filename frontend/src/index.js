@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './pages/Home';
 import './index.css';
-import { GlobalContext } from "./components/parts/GlobalData";
+import { GlobalContexts } from "./components/parts/GlobalData";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<GlobalContext>
+		<GlobalContexts>
 			<Home/>
-		</GlobalContext>
+		</GlobalContexts>
 	</React.StrictMode>
 );

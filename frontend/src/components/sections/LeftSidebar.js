@@ -1,6 +1,6 @@
 import Sidebar from "../parts/Sidebar/Sidebar";
 import MenuIcon from "../../static/menu_icon.svg";
-import useGlobal, { saveAPIKey } from "../parts/GlobalData";
+import { useDisplay, useEnvironment } from "../parts/GlobalData";
 import SidebarLabel from "../parts/Sidebar/SidebarLabel";
 import CardButton from "../parts/Cards/CardButton";
 import KeyIcon from "../../static/key_icon.svg"
@@ -13,15 +13,16 @@ import { useState } from "react";
 import "./LeftSidebar.css";
 
 export default function LeftSidebar() {
-	const global = useGlobal();
+	const environment = useEnvironment();
+	const display = useDisplay();
 	const closeAfter = cb => () => {
 		cb && cb();
-		global.update({ leftNavOpen: false });
+		display.update({ leftNavOpen: false });
 	};
 
 	const [apiKeyInput, setApiKeyInput] = useState(null);
 	const onAPIKeyBlur = closeAfter(() => {
-		saveAPIKey(global, apiKeyInput);
+		environment.saveAPIKey(apiKeyInput);
 		setApiKeyInput(null);
 	});
 
@@ -29,8 +30,8 @@ export default function LeftSidebar() {
 		<Sidebar
 			className="left-side-bar"
 			Icon={MenuIcon}
-			open={global.data.leftNavOpen}
-			onNavToggle={() => global.update({ leftNavOpen: !global.data.leftNavOpen })}
+			open={display.leftNavOpen}
+			onNavToggle={() => display.update({ leftNavOpen: !display.leftNavOpen })}
 		>
 			<SidebarLabel>General</SidebarLabel>
 			<CardButton
@@ -39,12 +40,12 @@ export default function LeftSidebar() {
 				tabIndex={0}
 				onClick={() => {
 					if(apiKeyInput === null) {
-						setApiKeyInput(global.data.apiKey);
+						setApiKeyInput(environment.apiKey);
 					}
 				}}
 			>
 				{apiKeyInput === null
-					? (global.data.apiKey ? "Change API Key" : "Set API Key")
+					? (environment.apiKey ? "Change API Key" : "Set API Key")
 					: (
 						<input
 							type="password"

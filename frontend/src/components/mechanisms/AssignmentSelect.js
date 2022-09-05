@@ -1,4 +1,4 @@
-import useGlobal from "../parts/GlobalData";
+import { useCourse, useEnvironment } from "../parts/GlobalData";
 import BetterSelect from "../parts/BetterSelect";
 import { useEffect, useState } from "react";
 
@@ -9,8 +9,9 @@ export default function AssignmentSelect(props) {
 		placeholderText,
 		...args
 	} = props;
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const environment = useEnvironment();
+	const course = useCourse();
+	const { SERVER_URL, apiHeader } = environment;
 	const [groupFilter, setGroupFilter] = useState("");
 	const [assignments, setAssignments] = useState(null);
 	const [assignmentGroups, setAssignmentGroups] = useState(null);

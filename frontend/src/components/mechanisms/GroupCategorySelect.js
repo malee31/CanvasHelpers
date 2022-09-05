@@ -1,6 +1,6 @@
 import BetterSelect from "../parts/BetterSelect";
 import { useEffect, useState } from "react";
-import useGlobal from "../parts/GlobalData";
+import { useCourse, useEnvironment } from "../parts/GlobalData";
 
 export default function GroupCategorySelect(props) {
 	const {
@@ -8,8 +8,9 @@ export default function GroupCategorySelect(props) {
 		setSelectedGroupCategory,
 		...args
 	} = props;
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const environment = useEnvironment();
+	const course = useCourse();
+	const { SERVER_URL, apiHeader } = environment;
 	const [groupCategories, setGroupCategories] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("Select A Course First");
 

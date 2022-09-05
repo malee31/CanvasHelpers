@@ -1,5 +1,5 @@
 import AddIcon from "../../../static/add.svg";
-import useGlobal from "../../parts/GlobalData";
+import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
@@ -7,8 +7,9 @@ import { useState } from "react";
 import "./CreateKudos.css";
 
 export default function CreateKudos() {
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const display = useDisplay();
+	const { SERVER_URL, apiHeader } = useEnvironment();
+	const course = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState(null);
 	const [kudosName, setKudosName] = useState("Kudos Assignment");
@@ -18,7 +19,7 @@ export default function CreateKudos() {
 	const [closeDate, setCloseDate] = useState("");
 
 	const onCreate = () => {
-		global.addLog({
+		display.addLog({
 				message: `Creating Kudos for [${course.name}]`
 			}, ({ setStatus, setError }) => {
 				const data = {

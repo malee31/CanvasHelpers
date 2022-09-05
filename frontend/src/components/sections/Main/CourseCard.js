@@ -1,27 +1,22 @@
 import DeskGeometricIcon from "../../../static/desk.svg";
 import CardButton from "../../parts/Cards/CardButton";
-import useGlobal from "../../parts/GlobalData";
-import "./CourseCard.css";
+import { useCourse, useEnvironment } from "../../parts/GlobalData";
 import { useEffect, useState } from "react";
+import "./CourseCard.css";
 
 export default function CourseCard() {
-	const global = useGlobal();
-	const { apiHeader, course } = global.data;
+	const { SERVER_URL, apiHeader } = useEnvironment();
+	const course = useCourse();
 	const [open, setOpen] = useState(true);
 	const [courses, setCourses] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("Loading...");
-	const changeCourse = course => {
-		global.update({
-			course: {
-				name: course.name,
-				id: course.id
-			}
-		});
+	const changeCourse = newCourse => {
+		course.setCourse(newCourse.id, newCourse.name);
 		setOpen(false);
 	};
 
 	useEffect(() => {
-		fetch(`${global.data.SERVER_URL}/courses`, {
+		fetch(`${SERVER_URL}/courses`, {
 			headers: apiHeader
 		})
 			.then(async res => {

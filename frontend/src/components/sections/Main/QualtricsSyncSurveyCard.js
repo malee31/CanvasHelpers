@@ -1,5 +1,5 @@
 import ClipboardIcon from "../../../static/clipboard.svg";
-import useGlobal from "../../parts/GlobalData";
+import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import BetterFileUpload from "../../parts/BetterFileUpload";
@@ -7,8 +7,9 @@ import AssignmentSelect from "../../mechanisms/AssignmentSelect";
 import { useState } from "react";
 
 export default function QualtricsSyncSurveyCard() {
-	const global = useGlobal();
-	const { SERVER_URL, apiHeader, course } = global.data;
+	const display = useDisplay();
+	const { SERVER_URL, apiHeader } = useEnvironment();
+	const course = useCourse();
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
 	const [selectedAssignment, setSelectedAssignment] = useState(null);
@@ -17,7 +18,7 @@ export default function QualtricsSyncSurveyCard() {
 	const onSync = () => {
 		if(!file || !selectedAssignment) return;
 
-		global.addLog({
+		display.addLog({
 				message: `Synchronizing Qualtrics Survey for [${selectedAssignment}]`
 			}, ({ setStatus, setError }) => {
 				return fetch(`${SERVER_URL}/course/${course.id}/surveycredit/${selectedAssignment}`, {
