@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const savedAPIKey = localStorage.getItem("CANVAS_API_KEY") || "";
 
@@ -38,7 +38,7 @@ const environmentContext = createContext(environmentTemplate);
 const displayContext = createContext(displayTemplate);
 const courseContext = createContext(courseTemplate);
 
-function GenerateContext(context, contextTemplate, helperGenerator) {
+function GenerateContext(context, contextTemplate, helperGenerator, useDataSync) {
 	return ({ children }) => {
 		const [data, setData] = useState({ ...contextTemplate });
 
@@ -52,12 +52,15 @@ function GenerateContext(context, contextTemplate, helperGenerator) {
 		};
 
 		const helpers = typeof helperGenerator === "function" ? helperGenerator({ data, setData, update }) : {};
+		const useSync = typeof useDataSync === "function" ? useDataSync : () => {};
 
 		const value = {
 			...data,
 			...helpers,
 			update
 		};
+
+		useSync(value);
 
 		return (
 			<context.Provider value={value}>
@@ -123,8 +126,6 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 					[courseID]: newCourse
 				}
 			});
-			console.log("New course")
-			// TODO: Load assignments and userGroups
 		},
 		clear: () => {
 			update({
@@ -133,6 +134,29 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 			});
 		}
 	}
+}, data => {
+	const { SERVER_URL, apiHeader } = useEnvironment();
+
+	// TODO: Add error handling
+	useEffect(() => {
+		if(!data.course.id) return;
+		console.log("Regenerating course data...");
+		// TODO: Regenerate data and cache the course
+		// NOTE: Both fetches are fire and forget
+		fetch(`${SERVER_URL}/course/${data.course.id}/groups/categories`, {
+			headers: apiHeader
+		}).then(async res => {
+			if(res.status !== 200) return;
+			const newGroupCategories = await res.json();
+			data.update({
+				course: {
+					...data.course,
+					userGroups: newGroupCategories
+				}
+			});
+		});
+
+	}, [data.course.id, SERVER_URL, apiHeader]);
 });
 
 export const useEnvironment = () => useContext(environmentContext);

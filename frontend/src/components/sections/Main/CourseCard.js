@@ -14,8 +14,9 @@ export default function CourseCard() {
 	const changeCourse = newCourse => {
 		courseData.setCourse(newCourse.id, newCourse.name);
 		setOpen(false);
-
 	};
+
+
 	useEffect(() => {
 		fetch(`${SERVER_URL}/courses`, {
 			headers: apiHeader
