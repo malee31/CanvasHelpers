@@ -53,6 +53,12 @@ export default function CreateKudos() {
 		)
 	};
 
+	const defaultDates = defaultVal => {
+		if(!openDate) setOpenDate(defaultVal);
+		if(!dueDate) setDueDate(defaultVal);
+		if(!closeDate) setCloseDate(defaultVal);
+	}
+
 	return (course.id &&
 		<CollapsibleCard
 			id="create-kudos"
@@ -66,6 +72,7 @@ export default function CreateKudos() {
 		>
 			<GroupCategorySelect
 				setSelectedGroupCategory={setSelectedGroupCategory}
+				style={{ marginBottom: ".5rem" }}
 			/>
 			<AssignmentGroupSelect
 				setSelectedAssignmentGroup={setSelectedAssignmentGroup}
@@ -78,6 +85,7 @@ export default function CreateKudos() {
 				<input
 					className="create-kudos-card-grid-input"
 					type="text"
+					value={kudosName}
 					onChange={e => setKudosName(e.target.value)}
 				/>
 
@@ -92,23 +100,27 @@ export default function CreateKudos() {
 				<input
 					className="create-kudos-card-grid-input"
 					type="datetime-local"
+					value={openDate}
 					onChange={e => setOpenDate(e.target.value)}
+					onBlur={e => defaultDates(e.target.value)}
 				/>
 
 				<label>Due Date: </label>
 				<input
 					className="create-kudos-card-grid-input"
 					type="datetime-local"
-					defaultValue={openDate}
+					value={dueDate}
 					onChange={e => setDueDate(e.target.value)}
+					onBlur={e => defaultDates(e.target.value)}
 				/>
 
 				<label>Close Date: </label>
 				<input
 					className="create-kudos-card-grid-input"
 					type="datetime-local"
-					defaultValue={dueDate || openDate}
+					value={closeDate}
 					onChange={e => setCloseDate(e.target.value)}
+					onBlur={e => defaultDates(e.target.value)}
 				/>
 			</div>
 

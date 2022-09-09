@@ -35,8 +35,8 @@ export default function CollapsibleCard(props) {
 				className="collapsible-card-display"
 				Icon={Icon}
 				pad={pad}
-				id={id && `${id}-open`}
-				href={id && open && `#${id}-open`}
+				id={id && open ? `#${id}-open` : undefined}
+				href={id && open ? `#${id}-open` : undefined}
 				onClick={() => setOpen(!open)}
 			>
 				{cardText}
