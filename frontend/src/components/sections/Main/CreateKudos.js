@@ -5,6 +5,7 @@ import BetterButton from "../../parts/BetterButton";
 import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
 import { useState } from "react";
 import "./CreateKudos.css";
+import AssignmentGroupSelect from "../../mechanisms/AssignmentGroupSelect";
 
 export default function CreateKudos() {
 	const display = useDisplay();
@@ -12,6 +13,7 @@ export default function CreateKudos() {
 	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedGroupCategory, setSelectedGroupCategory] = useState(null);
+	const [selectedAssignmentGroup, setSelectedAssignmentGroup] = useState(null);
 	const [kudosName, setKudosName] = useState("Kudos Assignment");
 	const [points, setPoints] = useState(2);
 	const [openDate, setOpenDate] = useState("");
@@ -23,6 +25,8 @@ export default function CreateKudos() {
 				message: `Creating Kudos for [${course.name}]`
 			}, ({ setStatus, setError }) => {
 				const data = {
+					studyGroup: selectedGroupCategory,
+					assignmentGroup: selectedAssignmentGroup,
 					assignmentName: kudosName,
 					points: points,
 					openDate: openDate,
@@ -61,9 +65,10 @@ export default function CreateKudos() {
 			showError={false}
 		>
 			<GroupCategorySelect
-				selectedGroupCategory={selectedGroupCategory}
 				setSelectedGroupCategory={setSelectedGroupCategory}
-				onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
+			/>
+			<AssignmentGroupSelect
+				setSelectedAssignmentGroup={setSelectedAssignmentGroup}
 			/>
 
 			<div

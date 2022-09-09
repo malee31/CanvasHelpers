@@ -183,7 +183,6 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 					};
 				})
 		]).then(([newUserGroups, newAssignments]) => {
-			console.log([newUserGroups, newAssignments])
 			data.update({
 				course: {
 					...data.course,
@@ -191,7 +190,7 @@ const CourseContext = GenerateContext(courseContext, courseTemplate, ({ data, up
 					userGroups: newUserGroups
 				}
 			});
-			console.log("Successfully fetched course data")
+			console.log("Successfully fetched course data");
 		});
 	}, [data.course.id, SERVER_URL, apiHeader]);
 });

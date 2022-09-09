@@ -4,7 +4,6 @@ import { useCourse, useEnvironment } from "../parts/GlobalData";
 
 export default function GroupCategorySelect(props) {
 	const {
-		selectedGroupCategory,
 		setSelectedGroupCategory,
 		...args
 	} = props;

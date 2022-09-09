@@ -3,7 +3,7 @@ import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
 import BetterFileUpload from "../../parts/BetterFileUpload";
-import AssignmentSelect from "../../mechanisms/AssignmentSelect";
+import AssignmentSelectByGroup from "../../mechanisms/AssignmentSelectByGroup";
 import { useState } from "react";
 
 export default function QualtricsSyncSurveyCard() {
@@ -51,12 +51,10 @@ export default function QualtricsSyncSurveyCard() {
 			maxHeight="15rem"
 			showError={false}
 		>
-			<AssignmentSelect
+			<AssignmentSelectByGroup
 				placeholderText="Select Survey Assignment to Score"
 				style={{ margin: ".5rem 0" }}
-				selectedAssignment={selectedAssignment}
 				setSelectedAssignment={setSelectedAssignment}
-				onChange={e => setSelectedAssignment(e.currentTarget.value)}
 			/>
 			<BetterFileUpload
 				type="file"

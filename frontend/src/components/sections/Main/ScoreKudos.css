@@ -1,0 +1,30 @@
+.score-kudos-assignment-list {
+	width: 100%;
+	display: grid;
+	grid-template-columns: min-content 3fr 2fr min-content;
+	align-items: center;
+}
+
+.score-kudos-assignment-list-check {
+	width: 1rem;
+	height: 1rem;
+}
+
+.score-kudos-assignment-list-name {
+	margin: 0 .2rem;
+	white-space: nowrap;
+	overflow-x: auto;
+}
+
+.score-kudos-assignment-list-points {
+	width: min-content;
+	margin: 0 .2rem;
+}
+
+.score-kudos-assignment-list-points span {
+	text-align: center;
+}
+
+.score-kudos-assignment-list-points input {
+	width: 100%;
+}

@@ -44,7 +44,6 @@ export default function GroupCategoryCard() {
 			maxHeight="8rem"
 		>
 			<GroupCategorySelect
-				selectedGroupCategory={selectedGroupCategory}
 				setSelectedGroupCategory={setSelectedGroupCategory}
 				onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
 			/>
