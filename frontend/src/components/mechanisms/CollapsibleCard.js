@@ -22,7 +22,7 @@ export default function CollapsibleCard(props) {
 		const listener = e => {
 			if(!window.location.hash || window.location.hash.length < 1) return;
 			if(window.location.hash.slice(1) === id) setOpen(true);
-			else setOpen(false);
+			else if(!window.location.hash.slice(1).endsWith("-open")) setOpen(false);
 		};
 
 		window.addEventListener("hashchange", listener);
@@ -35,6 +35,8 @@ export default function CollapsibleCard(props) {
 				className="collapsible-card-display"
 				Icon={Icon}
 				pad={pad}
+				id={id && `${id}-open`}
+				href={id && `#${id}-open`}
 				onClick={() => setOpen(!open)}
 			>
 				{cardText}

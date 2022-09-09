@@ -1,7 +1,7 @@
 .score-kudos-assignment-list {
 	width: 100%;
 	display: grid;
-	grid-template-columns: min-content 3fr 2fr min-content;
+	grid-template-columns: min-content 5fr 4fr min-content;
 	align-items: center;
 }
 

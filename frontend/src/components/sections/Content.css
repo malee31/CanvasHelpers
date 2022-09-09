@@ -16,6 +16,6 @@ main::-webkit-scrollbar {
 	width: 100%;
 	max-width: 800px;
 	height: max-content;
-	margin: 0 auto 10rem;
+	margin: 0 auto 0;
 	padding: 1rem;
 }

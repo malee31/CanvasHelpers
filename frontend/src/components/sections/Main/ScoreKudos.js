@@ -43,7 +43,7 @@ export default function ScoreKudos() {
 			open={open}
 			setOpen={setOpen}
 			cardText="Score Kudos"
-			maxHeight="15rem"
+			maxHeight="30rem"
 			showError={false}
 		>
 			<AssignmentGroupSelect

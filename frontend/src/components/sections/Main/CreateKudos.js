@@ -61,7 +61,7 @@ export default function CreateKudos() {
 			open={open}
 			setOpen={setOpen}
 			cardText="Create Kudos"
-			maxHeight="20rem"
+			maxHeight="35rem"
 			showError={false}
 		>
 			<GroupCategorySelect
