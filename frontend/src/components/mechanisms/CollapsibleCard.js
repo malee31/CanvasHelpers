@@ -36,7 +36,7 @@ export default function CollapsibleCard(props) {
 				Icon={Icon}
 				pad={pad}
 				id={id && `${id}-open`}
-				href={id && `#${id}-open`}
+				href={id && open && `#${id}-open`}
 				onClick={() => setOpen(!open)}
 			>
 				{cardText}
