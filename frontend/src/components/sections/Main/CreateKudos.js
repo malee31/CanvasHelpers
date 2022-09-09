@@ -25,11 +25,9 @@ export default function CreateKudos() {
 				const data = {
 					assignmentName: kudosName,
 					points: points,
-					dates: {
-						open: openDate,
-						due: dueDate,
-						close: closeDate
-					}
+					openDate: openDate,
+					dueDate: dueDate,
+					closeDate: closeDate
 				};
 
 				fetch(`${SERVER_URL}/course/${course.id}/kudos/create`, {

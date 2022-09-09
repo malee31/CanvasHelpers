@@ -2,16 +2,14 @@ import HandshakeIcon from "../../../static/handshake.svg";
 import { useCourse, useDisplay, useEnvironment } from "../../parts/GlobalData";
 import CollapsibleCard from "../../mechanisms/CollapsibleCard";
 import BetterButton from "../../parts/BetterButton";
-import GroupCategorySelect from "../../mechanisms/GroupCategorySelect";
-import { useState } from "react";
 import AssignmentSelect from "../../mechanisms/AssignmentSelect";
+import { useState } from "react";
 
 export default function ScoreKudos() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
 	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
-	const [selectedGroupCategory, setSelectedGroupCategory] = useState("");
 	const [selectedAssignment, setSelectedAssignment] = useState("");
 
 	const onCreate = () => {
@@ -44,11 +42,6 @@ export default function ScoreKudos() {
 			maxHeight="15rem"
 			showError={false}
 		>
-			<GroupCategorySelect
-				selectedGroupCategory={selectedGroupCategory}
-				setSelectedGroupCategory={setSelectedGroupCategory}
-				onChange={e => setSelectedGroupCategory(e.currentTarget.value)}
-			/>
 			<AssignmentSelect
 				placeholderText="Select Kudos Assignment"
 				style={{ margin: "0 0 .5rem 0" }}
