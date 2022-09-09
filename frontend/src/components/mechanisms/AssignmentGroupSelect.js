@@ -20,7 +20,7 @@ export default function AssignmentGroupSelect(props) {
 	return (
 		<>
 			<BetterSelect
-				placeholderText="Select Assignment Group"
+				placeholderText={placeholderText || "Select Assignment Group"}
 				onChange={e => setSelectedAssignmentGroup(e.target.value)}
 				{...args}
 			>

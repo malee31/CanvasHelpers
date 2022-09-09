@@ -13,6 +13,7 @@ export default function ScoreKudos() {
 	const { course } = useCourse();
 	const [open, setOpen] = useState(false);
 	const [selectedAssignmentGroup, setSelectedAssignmentGroup] = useState("");
+	const [outputAssignmentGroup, setOutputAssignmentGroup] = useState("");
 	const assignments = course.assignments.all;
 
 	const onCreate = () => {
@@ -45,6 +46,11 @@ export default function ScoreKudos() {
 			maxHeight="15rem"
 			showError={false}
 		>
+			<AssignmentGroupSelect
+				placeholderText="Select Output Assignment Group"
+				style={{ margin: "0 0 .5rem 0" }}
+				setSelectedAssignmentGroup={setOutputAssignmentGroup}
+			/>
 			<AssignmentGroupSelect
 				placeholderText="Select Kudos Assignment Group"
 				style={{ margin: "0 0 .5rem 0" }}
