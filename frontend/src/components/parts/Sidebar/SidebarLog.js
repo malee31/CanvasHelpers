@@ -10,12 +10,16 @@ export default function SidebarLog(props) {
 		...args
 	} = props;
 
-	const [status, setStatus] = useState("Running...");
+	const [status, setStatus] = useState(fire ? "Running..." : "");
 	const [error, setError] = useState(false);
 
 	const refire = fire ? () => {
 		if(error) setError(false);
-		fire({ setStatus, setError });
+		fire({ setStatus, setError })
+			.catch(err => {
+				setError(true);
+				setStatus(`Error: ${err.code} - ${err.message}`);
+			});
 	} : () => {};
 
 	useEffect(refire, []);
