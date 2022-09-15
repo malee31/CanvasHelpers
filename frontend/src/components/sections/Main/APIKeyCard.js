@@ -27,6 +27,7 @@ export default function APIKeyCard() {
 				placeholder="Enter API Key Here"
 				value={newAPIKey}
 				onChange={e => setNewAPIKey(e.target.value)}
+				onKeyDown={e => e.code === "Enter" && onAPIBlur()}
 				onBlur={onAPIBlur}
 			/>
 		</CollapsibleCard>
