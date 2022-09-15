@@ -7,6 +7,8 @@ import BetterButton from "../../parts/BetterButton";
 import { Fragment, useState } from "react";
 import "./ScoreKudos.css";
 
+const defaultPoints = 2;
+
 export default function ScoreKudos() {
 	const display = useDisplay();
 	const { SERVER_URL, apiHeader } = useEnvironment();
@@ -41,10 +43,10 @@ export default function ScoreKudos() {
 					assignmentGroup: selectedAssignmentGroup,
 					outputAssignmentGroup: outputAssignmentGroup,
 					scoreTargets: Object.keys(listData)
-						.filter(key => listData[key].selected)
+						.filter(key => listData[key].selected && listData[key].targetGroup)
 						.map(key => {
 							const current = { ...listData[key] };
-							current.points = current.points || 0;
+							current.points = isNaN(current.points) ? defaultPoints : current.points;
 							return current;
 						})
 				};
