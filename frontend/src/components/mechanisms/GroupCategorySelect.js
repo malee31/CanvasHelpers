@@ -17,6 +17,7 @@ export default function GroupCategorySelect(props) {
 	return (
 		<BetterSelect
 			placeholderText={placeholderMessage}
+			onChange={e => setSelectedGroupCategory(e.target.value)}
 			{...args}
 		>
 			{Array.isArray(course.userGroups) && (

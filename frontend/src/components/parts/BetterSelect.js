@@ -5,13 +5,15 @@ export default function BetterSelect(props) {
 		className = "",
 		children,
 		placeholderText,
+		value,
 		...args
 	} = props;
 
 	return (
 		<select
 			className={`better-select ${className}`}
-			defaultValue={-1}
+			defaultValue={typeof value === "undefined" ? -1 : undefined}
+			value={value !== null ? value : -1 }
 			{...args}
 		>
 			<option disabled={true} value={-1}>{placeholderText || "Select an Option"}</option>
