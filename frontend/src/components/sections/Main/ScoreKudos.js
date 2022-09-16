@@ -124,24 +124,23 @@ export default function ScoreKudos() {
 									<GroupCategorySelect
 										value={listEntry.targetGroup}
 										setSelectedGroupCategory={(selectedGroupCategory => {
-											listEntry.targetGroup = selectedGroupCategory;
-											setListData(newListData);
-										})}
-										onBlur={() => {
 											if(Object.keys(newListData)
-												.every(key => key === assignment.id.toString() || newListData[key].targetGroup === null)) {
+												.every(key => newListData[key].targetGroup === null)) {
 												Object.keys(newListData).forEach(key =>
-													newListData[key].targetGroup = newListData[assignment.id].targetGroup
+													newListData[key].targetGroup = selectedGroupCategory
 												);
 												setListData(newListData);
+											} else {
+												listEntry.targetGroup = selectedGroupCategory;
 											}
-										}}
+											setListData(newListData);
+										})}
 									/>
 									<input
 										className="score-kudos-assignment-list-points-input"
 										type="number"
 										min={0}
-										value={listEntry.points || 0}
+										value={isNaN(listEntry.points) ? defaultPoints : listEntry.points}
 										onChange={e => {
 											listEntry.points = Number(e.target.value) || 0;
 											setListData(newListData);
